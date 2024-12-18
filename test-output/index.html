@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Javi\AppData\Local\Temp\testng-eclipse-552525152\testng-customsuite.xml</span>
+                    <span>C:\Users\Javi\AppData\Local\Temp\testng-eclipse-45266290\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -103,7 +103,7 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="Run_Scenario1" class="method navigator-link" hash-for-method="runScenario(&quot;Abrir la página principal&quot;, &quot;Navegar a la página principal&quot;)">runScenario("Abrir la página principal", "Navegar a la página principal")</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="Run_Scenario1" class="method navigator-link" hash-for-method="runScenario(&quot;Registro exitoso de un nuevo usuario&quot;, &quot;Registro de usuario&quot;)">runScenario("Registro exitoso de un nuevo usuario", "Registro de usuario")</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -126,35 +126,19 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="runScenario(&quot;Abrir la página principal&quot;, &quot;Navegar a la página principal&quot;)">
-                  </a> <!-- runScenario("Abrir la página principal", "Navegar a la página principal") -->
+                  <a name="runScenario(&quot;Registro exitoso de un nuevo usuario&quot;, &quot;Registro de usuario&quot;)">
+                  </a> <!-- runScenario("Registro exitoso de un nuevo usuario", "Registro de usuario") -->
                   <span class="method-name">runScenario</span>
-                  <span class="parameters">("Abrir la página principal","Navegar a la página principal")</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.fc\-button\-label&quot;}
-  (Session info: chrome=131.0.6778.140)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+                  <span class="parameters">("Registro exitoso de un nuevo usuario","Registro de usuario")</span>
+                  <div class="stack-trace">org.openqa.selenium.InvalidSelectorException: Compound class names not permitted
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
 Build info: version: &apos;4.26.0&apos;, revision: &apos;8ccf0219d7&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;22.0.2&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [66353f0cbc80080fa48467a218a314af, findElement {using=class name, value=fc-button-label}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 131.0.6778.140, chrome: {chromedriverVersion: 131.0.6778.85 (3d81e41b6f3a..., userDataDir: C:\Users\Javi\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:62878}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62878/devtoo..., se:cdpVersion: 131.0.6778.140, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 66353f0cbc80080fa48467a218a314af
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:66)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:362)
-	at steps.Steps_Scenario1.TheUserIsInTheHomepage(Steps_Scenario1.java:18)
-	at ✽.the user is in the homepage(file:///C:/Users/Javi/eclipse-workspace/Performance%20Testing/src/test/java/features/F1.feature:4)
+Driver info: driver.version: unknown
+	at org.openqa.selenium.By$ByClassName.&lt;init&gt;(By.java:309)
+	at org.openqa.selenium.By.className(By.java:100)
+	at steps.Steps_Scenario1.TheUserClicksOnTheContinueButton(Steps_Scenario1.java:47)
+	at ✽.the user clicks on the continue button(file:///C:/Users/Javi/eclipse-workspace/Performance%20Testing/src/test/java/features/F1.feature:14)
 
 </div> <!-- stack-trace -->
                   <em>
@@ -166,7 +150,7 @@ Session ID: 66353f0cbc80080fa48467a218a314af
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Javi\AppData\Local\Temp\testng-eclipse-552525152\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Javi\AppData\Local\Temp\testng-eclipse-45266290\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -227,12 +211,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'Run_Scenario1')
-data.setCell(0, 3, 5138);
+data.setCell(0, 3, 6736);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 6 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -260,18 +244,18 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">Run_Scenario1</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUpClass(org.testng.TestRunner@185f7840)</span>
+                <span class="method-name">setUpClass(org.testng.TestRunner@4e92466a)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">runScenario("Abrir la página principal", "Navegar a la página principal")</span>
-                <span class="method-start">357 ms</span>
+                <span class="method-name">runScenario("Registro exitoso de un nuevo usuario", "Registro de usuario")</span>
+                <span class="method-start">341 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">5509 ms</span>
+                <span class="method-start">7086 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
