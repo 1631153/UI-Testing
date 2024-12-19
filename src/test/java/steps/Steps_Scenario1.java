@@ -14,6 +14,7 @@ public class Steps_Scenario1 {
     
     WebDriver driver;
     
+    //Scenario 1
     @Given("the user is in the homepage")
 	public void TheUserIsInTheIndexPage() {
 		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
@@ -44,7 +45,7 @@ public class Steps_Scenario1 {
     
     @When("the user clicks on the continue button")
     public void TheUserClicksOnTheContinueButton() {
-    	driver.findElement(By.className("btn btn-primary")).click();
+    	driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click();
     }
     
     @Then("the user should see a confirmation message")
@@ -53,4 +54,32 @@ public class Steps_Scenario1 {
         String actualMessage = driver.findElement(By.cssSelector("div#content p")).getText();
         Assert.assertEquals(actualMessage, expectedMessage, "The success message is incorrect.");
     }
+    
+    //Scenario 2
+    @When("the user clicks to go to the login page")
+    public void TheUserClicksToGoToTheLoginPage() {
+    	driver.findElement(By.cssSelector("a[title='My Account']")).click();
+        driver.findElement(By.linkText("Login")).click();
+    }
+    
+    @When("the user fills email and password:")
+    public void theUserFillsEmailAndPassword(Map<String, String> userDetails) {
+        driver.findElement(By.id("input-email")).sendKeys(userDetails.get("Email"));
+        driver.findElement(By.id("input-password")).sendKeys(userDetails.get("Password"));
+    }
+    
+    @When("the user clicks on the Login button")
+    public void TheUserClicksOnTheLoginButton() {
+    	driver.findElement(By.cssSelector("input.btn.btn-primary[value='Login']")).click();
+    }
+    
+    @Then("the user should see the account page")
+    public void TheUserShouldSeeTheAccountPage() {
+    	Assert.assertEquals("https://opencart.abstracta.us/index.php?route=account/account", driver.getCurrentUrl(), "The actual page is not the account page.");
+    }
+    
+    
+    
+    
+    
 }
