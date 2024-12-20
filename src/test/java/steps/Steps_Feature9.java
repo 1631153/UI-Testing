@@ -13,7 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class Steps_Scenario9 {
+public class Steps_Feature9 {
 
     private WebDriver driver;
 

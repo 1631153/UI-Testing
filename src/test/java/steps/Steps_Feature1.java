@@ -10,7 +10,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import java.util.Map;
 
-public class Steps_Scenario1 {
+public class Steps_Feature1 {
     
     WebDriver driver;
     
