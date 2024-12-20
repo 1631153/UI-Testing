@@ -40,7 +40,7 @@ public class Steps_Feature9 {
     }
 
     // El usuario abre la página de inicio
-    @Given("El usuario está en la página de inicio")
+    @Given("El usuario está en la página de inicio para buscar")
     public void usuarioEnPaginaInicio() {
         // Navega a la página de inicio de OpenCart
         driver.navigate().to("https://opencart.abstracta.us/index.php?route=common/home");
