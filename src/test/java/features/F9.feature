@@ -1,4 +1,7 @@
 Feature: Buscar productos en OpenCart
+	Para que el usuario pueda encontrar fácilmente productos en la tienda
+	Como usuario de OpenCart
+	Quiero poder buscar productos por su nombre en la barra de búsqueda
 
   Scenario: Buscar un producto existente
     Given El usuario está en la página de inicio para buscar

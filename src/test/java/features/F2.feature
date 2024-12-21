@@ -1,10 +1,10 @@
 Feature: Inicio de sesión
-Scenario: Inicio de sesión en la pagina
 
-Given the user is in the homepage
-When the user clicks to go to the login page
-And the user fills email and password:
-    | Email        | javi.david@test.com |
-    | Password     | Password123   |
-And the user clicks on the Login button
-Then the user should see the account page
+  Scenario: Inicio de sesión en la página
+    Given El usuario está en la página de inicio para iniciar sesión
+    When El usuario hace clic para ir a la página de inicio de sesión
+    And El usuario ingresa el correo electrónico y la contraseña:
+      | Email                  | javi.david@test.com |
+      | Password               | Password123         |
+    And El usuario hace clic en el botón de Iniciar sesión
+    Then El usuario debería ver la página de su cuenta

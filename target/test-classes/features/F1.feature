@@ -1,7 +1,7 @@
 Feature: Registro de usuario
 Scenario: Registro exitoso de un nuevo usuario
 
-Given the user is in the homepage
+Given the user is in the homepage for register
 When the user clicks to go to the registration page
 And the user fills in the registration form with the following details:
     | First Name   | Javi          |

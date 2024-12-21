@@ -14,7 +14,7 @@ public class Steps_Feature1 {
     
     WebDriver driver;
     
-    @Given("the user is in the homepage")
+    @Given("the user is in the homepage for register")
 	public void TheUserIsInTheIndexPage() {
 		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
 		driver = new ChromeDriver();
