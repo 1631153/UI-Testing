@@ -1,16 +1,7 @@
-Feature: Filtrar productos
-Scenario: Filtrar productos por la categoría Laptops & Notebooks
+Feature: Cambio de moneda
+Scenario: Cambiar la moneda de dolares a euros
 
 Given the user is in the homepage
-When the user clicks on MacBook from Featured
-And the user clicks Add to Cart button
-Then the user should see the cart summary
+When the user clicks on the currency dropdown to select Euro
+Then the prices on the homepage should be displayed all in euros
 
-
-
-
-
-Given the user is in the homepage
-When the user hovers over "Laptops & Notebooks" in the menu
-And the user clicks on "Show All Laptops & Notebooks"
-Then the user should see only products related to "Laptops & Notebooks"

@@ -2,12 +2,15 @@ package steps;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+
+import java.util.List;
 import java.util.Map;
 
 public class Steps_Scenario1 {
@@ -77,6 +80,33 @@ public class Steps_Scenario1 {
     public void TheUserShouldSeeTheAccountPage() {
     	Assert.assertEquals("https://opencart.abstracta.us/index.php?route=account/account", driver.getCurrentUrl(), "The actual page is not the account page.");
     }
+    //Scenario 3
+    
+    //Scenario 4
+    @When("the user clicks on the currency dropdown to select Euro")
+    public void TheUserClicksOnTheCurrencyDropdownToSelectEuro() {
+    	driver.findElement(By.className("dropdown-toggle")).click();
+    	driver.findElement(By.name("EUR")).click();
+    }
+    
+    @Then("the prices on the homepage should be displayed all in euros")
+    public void ThePricesOnTheHomepageShouldBeDisplayedAllInEuros() {
+    	List<WebElement> priceElements = driver.findElements(By.cssSelector(".price"));
+        boolean allPricesInEuros = true;
+
+        for (WebElement priceElement : priceElements) {
+            String priceText = priceElement.getText();
+            if (!priceText.contains("€")) {
+                allPricesInEuros = false;
+                System.out.println("El precio no está en euros: " + priceText);
+                break;
+            }
+        }
+
+        Assert.assertTrue(allPricesInEuros, "No todos los precios están en euros.");
+    	
+    }
+    
     
     
     
