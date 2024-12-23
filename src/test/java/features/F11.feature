@@ -1,21 +1,54 @@
-Feature: Eliminación de productos del carrito
-  Para gestionar los productos en el carrito de compras
-  Como usuario de la tienda online
-  Quiero poder eliminar productos del carrito de forma individual
+Feature: Gestión de la contraseña de la cuenta
+  Para mantener la seguridad de la cuenta
+  Como usuario registrado en la tienda online
+  Quiero cambiar mi contraseña para proteger mi cuenta
 
-  Scenario: Eliminar un solo producto del carrito
-    Given El usuario tiene productos en el carrito
-    When El usuario elimina un producto específico
-    Then El producto debería desaparecer del carrito
-    And El total del carrito debería actualizarse correctamente
+  # Escenario para cambiar la contraseña
+  Scenario: Cambiar la contraseña
+    Given El usuario está logeado en su cuenta
+      | Email                  | javi.david@test.com |
+      | Password               | Password123         |
+    When El usuario hace clic en el enlace "Password"
+    And El usuario introduce una nueva contraseña:
+      | Contraseña  | NuevaPass45 |
+    And El usuario introduce la confirmación de la nueva contraseña:
+      | Confirmar Contraseña | NuevaPass45 |
+    And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
+    Then La contraseña del usuario debería cambiarse con éxito
 
-  Scenario: Eliminar todos los productos eliminándolos uno a uno
-    Given El usuario tiene múltiples productos en el carrito
-    When El usuario elimina los productos uno por uno
-    Then El carrito debería estar vacío
-    And El total del carrito debería ser "0"
+  # Escenario para restaurar la contraseña a su valor original
+  Scenario: Restaurar la contraseña a su valor original
+    Given El usuario está logeado en su cuenta
+      | Email                  | javi.david@test.com |
+      | Password               | NuevaPass45         |
+    When El usuario hace clic en el enlace "Password"
+    And El usuario introduce una nueva contraseña:
+      | Contraseña | Password123 |
+    And El usuario introduce la confirmación de la nueva contraseña:
+      | Confirmar Contraseña | Password123 |
+    And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
+    Then La contraseña del usuario debería cambiarse con éxito
 
-  Scenario: Ver mensaje al eliminar el último producto
-    Given El usuario tiene un solo producto en el carrito
-    When El usuario elimina ese producto
-    Then El carrito debería mostrar el mensaje "Tu carrito está vacío"
+	# Escenario para intentar cambiar la contraseña sin confirmar la nueva contraseña
+  Scenario: Intentar cambiar la contraseña sin confirmar la nueva contraseña
+    Given El usuario está logeado en su cuenta
+      | Email                  | javi.david@test.com |
+      | Password               | Password123         |
+    When El usuario hace clic en el enlace "Password"
+    And El usuario introduce una nueva contraseña:
+      | Contraseña | NuevaPass45 |
+		And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
+    Then El sistema debería mostrar un mensaje de error indicando que las contraseñas no coinciden
+
+  # Escenario para intentar cambiar la contraseña con contraseñas que no coinciden
+  Scenario: Intentar cambiar la contraseña con contraseñas que no coinciden
+    Given El usuario está logeado en su cuenta
+      | Email                  | javi.david@test.com |
+      | Password               | Password123         |
+    When El usuario hace clic en el enlace "Password"
+    And El usuario introduce una nueva contraseña:
+      | Contraseña      | NuevaPass45 |
+    And El usuario introduce la confirmación de la nueva contraseña:
+      | Confirmar Contraseña | NuevaPass46 |
+    And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
+    Then El sistema debería mostrar un mensaje de error indicando que las contraseñas no coinciden
