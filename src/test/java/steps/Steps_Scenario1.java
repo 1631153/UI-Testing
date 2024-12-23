@@ -20,7 +20,7 @@ public class Steps_Scenario1 {
     //Scenario 1
     @Given("the user is in the homepage")
 	public void TheUserIsInTheIndexPage() {
-		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
 		driver = new ChromeDriver();
 		driver.navigate().to("https://opencart.abstracta.us/index.php?route=common/home");
 	} 
@@ -77,7 +77,8 @@ public class Steps_Scenario1 {
     }
     
     @Then("the user should see the account page")
-    public void TheUserShouldSeeTheAccountPage() {
+    public void TheUserShouldSeeTheAccountPage() throws InterruptedException {
+    	Thread.sleep(1000);
     	Assert.assertEquals("https://opencart.abstracta.us/index.php?route=account/account", driver.getCurrentUrl(), "The actual page is not the account page.");
     }
     //Scenario 3
@@ -107,6 +108,54 @@ public class Steps_Scenario1 {
     	
     }
     
+    
+    //Scenario 3
+    @When("the user clicks on MacBook from Featured")
+    public void theUserClicksOnMacBookFromFeatured() {
+        driver.findElement(By.linkText("MacBook")).click();
+    }
+    
+    @When("the user clicks Add to Cart button")
+    public void theUserClicksAddToCartButton() {
+        driver.findElement(By.id("button-cart")).click();
+    }
+    
+    @Then("the user should see the cart summary")
+    public void theUserShouldSeeTheCartSummary() throws InterruptedException {
+    	Thread.sleep(1000);
+    	WebElement successMessage = driver.findElement(By.cssSelector("div.alert.alert-success.alert-dismissible"));
+        Assert.assertTrue(successMessage.isDisplayed(), "El mensaje de éxito no se mostró.");
+
+        String cartText = driver.findElement(By.id("cart-total")).getText();
+        Assert.assertTrue(cartText.contains("1 item(s)"), "El carrito no tiene el producto esperado.");
+    }
+
+
+    //Scenario 4
+    @When("the user clicks on the currency dropdown to select Euro")
+    public void TheUserClicksOnTheCurrencyDropdownToSelectEuro() {
+    	driver.findElement(By.className("dropdown-toggle")).click();
+    	driver.findElement(By.name("EUR")).click();
+    }
+
+    @Then("the prices on the homepage should be all displayed in euros")
+    public void ThePricesOnTheHomepageShouldBeDisplayedAllInEuros() throws InterruptedException {
+    	Thread.sleep(1000);
+        List<WebElement> priceElements = driver.findElements(By.cssSelector(".price"));
+        boolean allPricesInEuros = true;
+
+        for (WebElement priceElement : priceElements) {
+            String priceText = priceElement.getText();
+            if (!priceText.contains("€")) {
+                allPricesInEuros = false;
+                System.out.println("El precio no está en euros: " + priceText);
+                break;
+            }
+        }
+
+        Assert.assertTrue(allPricesInEuros, "No todos los precios están en euros.");
+    }
+
     
     
     

@@ -6,8 +6,8 @@
       <class name="Run_Scenario1">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="0"/>
           <include name="tearDownClass"/>
+          <include name="runScenario" invocation-numbers="0"/>
         </methods>
       </class> <!-- Run_Scenario1 -->
     </classes>
