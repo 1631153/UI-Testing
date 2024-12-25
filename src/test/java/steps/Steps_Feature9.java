@@ -66,45 +66,37 @@ public class Steps_Feature9 {
     // Verifica que aparecen resultados relevantes relacionados con el producto
     @Then("Aparecen resultados relevantes relacionados con {string}")
     public void aparecenResultadosRelevantes(String producto) {
-        // Encuentra todos los enlaces <a> dentro de div#content
-        List<WebElement> links = driver.findElements(By.cssSelector("div#content a"));
-
-        // Variable para verificar si algún enlace contiene el texto "iphone"
-        boolean iphoneEnlaceEncontrado = false;
-
-        // Itera sobre los enlaces y verifica si alguno contiene el término "iphone"
-        for (WebElement link : links) {
-            if (link.getText().toLowerCase().contains("iphone")) {
-                iphoneEnlaceEncontrado = true;
-                break;  // Detiene el bucle cuando se encuentra el enlace
-            }
-        }
-
-        // Asegura que al menos un enlace contiene el texto "iphone"
-        Assert.assertTrue(iphoneEnlaceEncontrado,
-                "No se encontró un enlace que contenga 'iphone' en los resultados.");
+        // Llama a la función común para verificar si se encuentra el producto
+        boolean productoEncontrado = verificarElementoConTexto("div#content a", producto);
+        
+        // Asegura que al menos un enlace contiene el texto del producto
+        Assert.assertTrue(productoEncontrado,
+                "No se encontró un enlace relacionado con el producto '" + producto + "' en los resultados.");
     }
 
     // Verifica que no aparecen resultados y muestra el mensaje correspondiente
     @Then("No aparecen resultados y se muestra un mensaje de {string}")
     public void noAparecenResultados(String mensaje) {
-        // Encuentra todos los elementos <p> dentro de div#content
-        List<WebElement> paragraphs = driver.findElements(By.cssSelector("div#content p"));
-
-        // Variable para verificar si se encuentra el mensaje esperado
-        boolean mensajeEncontrado = false;
-
-        // Itera sobre los párrafos y verifica si alguno contiene el mensaje específico
-        for (WebElement paragraph : paragraphs) {
-            if (paragraph.getText().contains("Your shopping cart is empty!")) {
-                mensajeEncontrado = true;
-                break;  // Detiene el bucle cuando se encuentra el mensaje
-            }
-        }
-
+        // Llama a la función común para verificar si se encuentra el mensaje esperado
+        boolean mensajeEncontrado = verificarElementoConTexto("div#content p", mensaje);
+        
         // Asegura que se encontró el mensaje esperado
         Assert.assertTrue(mensajeEncontrado, 
-                "No se encontró el mensaje 'Your shopping cart is empty!' en los párrafos de la página.");
+                "No se encontró el mensaje '" + mensaje + "' en los párrafos de la página.");
+    }
+    
+    // Función común para verificar la presencia de texto en elementos
+    private boolean verificarElementoConTexto(String selector, String textoEsperado) {
+        // Encuentra todos los elementos correspondientes al selector
+        List<WebElement> elementos = driver.findElements(By.cssSelector(selector));
+        
+        // Itera sobre los elementos y verifica si alguno contiene el texto esperado
+        for (WebElement elemento : elementos) {
+            if (elemento.getText().toLowerCase().contains(textoEsperado.toLowerCase())) {
+                return true;  // Retorna true si se encuentra el texto
+            }
+        }
+        return false;  // Retorna false si no se encuentra el texto
     }
 
     // Métodos auxiliares para encontrar elementos por nombre y por selector CSS

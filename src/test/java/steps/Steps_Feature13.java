@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,12 +50,11 @@ public class Steps_Feature13 {
 	}
 
 	// Verifica que los mensajes de error esperados estén presentes en la interfaz
-	private void verifyErrorMessages(List<String> messages) {
-	    // Recorre los mensajes esperados y verifica que cada uno esté presente
-	    for (String message : messages) {
-	        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), '" + message + "')]")).isDisplayed(),
-	            "El mensaje de error no se mostró: " + message);
-	    }
+	private void verifyErrorMessages(Map<String, String> errorMessages) {
+		errorMessages.forEach((field, expectedMessage) -> {
+			By errorLocator = By.xpath("//div[contains(@class, 'text-danger') and contains(text(), '" + expectedMessage + "')]");
+			Assert.assertTrue(driver.findElement(errorLocator).isDisplayed(), "El mensaje de error para el campo " + field + " no se muestra.");
+		});
 	}
 
 	// Rellena el formulario con los campos proporcionados
@@ -129,7 +129,7 @@ public class Steps_Feature13 {
 	}
 
 	@When("El usuario hace clic en el enlace {string} 3")
-	public void el_usuario_hace_clic_en_el_enlace(String linkText) {
+	public void el_usuario_hace_clic_en_el_enlace3(String linkText) {
 	    clickButton(By.partialLinkText(linkText));
 	}
 
@@ -141,13 +141,14 @@ public class Steps_Feature13 {
 
 	@Then("El sistema debería mostrar un error indicando que todos los campos son obligatorios")
 	public void verifyAllFieldsError() {
-	    verifyErrorMessages(List.of(
-	        "First Name must be between 1 and 32 characters!",
-	        "Last Name must be between 1 and 32 characters!",
-	        "Address must be between 3 and 128 characters!",
-	        "City must be between 2 and 128 characters!",
-	        "Please select a region / state!"
-	    ));
+		Map<String, String> errorMessages = new HashMap<>();
+ 	    errorMessages.put("input-firstname", "First Name must be between 1 and 32 characters!");
+ 	    errorMessages.put("input-lastname", "Last Name must be between 1 and 32 characters!");
+ 	    errorMessages.put("input-address-1", "Address must be between 3 and 128 characters!");
+ 	    errorMessages.put("input-postcode", "Postcode must be between 2 and 10 characters!");
+ 	    errorMessages.put("input-city", "City must be between 2 and 128 characters!");
+ 	    errorMessages.put("input-zone", "Please select a region / state!");
+	    verifyErrorMessages(errorMessages);
 	}
 
 	@When("El usuario agrega una nueva dirección con:")
