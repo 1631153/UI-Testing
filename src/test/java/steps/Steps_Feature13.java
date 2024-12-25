@@ -13,187 +13,300 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Map;
 
 public class Steps_Feature13 {
 
-    WebDriver driver;
+	// WebDriver para interactuar con el navegador
+	WebDriver driver;
 
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-    }
+	// Configuración inicial del entorno de pruebas
+	@Before
+	public void setUp() {
+	    // Establece la propiedad del sistema para el controlador de Chrome
+	    System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
 
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+	    // Inicializa el WebDriver de Chrome
+	    driver = new ChromeDriver();
 
-    @Given("El usuario está logeado en su cuenta 3")
-    public void el_usuario_esta_logeado_en_su_cuenta3(Map<String, String> userDetails) {
-        String email = userDetails.get("Email");
-        String password = userDetails.get("Password");
+	    // Maximiza la ventana del navegador para asegurarse de que los elementos sean visibles
+	    driver.manage().window().maximize();
+	}
 
-        driver.navigate().to("https://opencart.abstracta.us/index.php?route=common/home");
-        driver.findElement(By.cssSelector("a[title='My Account']")).click();
-        driver.findElement(By.linkText("Login")).click();
-        driver.findElement(By.id("input-email")).sendKeys(email);
-        driver.findElement(By.id("input-password")).sendKeys(password);
-        driver.findElement(By.cssSelector("input.btn.btn-primary[value='Login']")).click();
-    }
+	// Limpieza después de la prueba para cerrar el navegador
+	@After
+	public void tearDown() {
+	    // Si el driver está inicializado, se cierra el navegador
+	    if (driver != null) {
+	        driver.quit();
+	    }
+	}
 
-    @When("El usuario hace clic en el enlace \"Address Book\" 3")
-    public void el_usuario_hace_clic_en_el_enlace_address_book3() {
-        driver.findElement(By.partialLinkText("Address Book")).click();
-    }
+	// Función para hacer clic en un botón usando un localizador
+	private void clickButton(By locator) {
+	    driver.findElement(locator).click();
+	}
 
-    @When("El usuario intenta agregar una nueva dirección sin completar ningún campo")
-    public void el_usuario_intenta_agregar_una_nueva_direccion_sin_completar() {
-        driver.findElement(By.cssSelector("a.btn.btn-primary")).click(); // Hacer clic en "Añadir nueva dirección"    
-        driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click(); // Intentar enviar el formulario vacío
-    }
+	// Verifica que los mensajes de error esperados estén presentes en la interfaz
+	private void verifyErrorMessages(List<String> messages) {
+	    // Recorre los mensajes esperados y verifica que cada uno esté presente
+	    for (String message : messages) {
+	        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), '" + message + "')]")).isDisplayed(),
+	            "El mensaje de error no se mostró: " + message);
+	    }
+	}
 
-    @Then("El sistema debería mostrar un error indicando que todos los campos son obligatorios")
-    public void el_sistema_deberia_mostrar_error_campos_obligatorios() {
-        // Verificar los mensajes de error específicos para campos vacíos
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), 'First Name must be between 1 and 32 characters!')]")).isDisplayed(), "El error de First Name no se ha mostrado.");
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), 'Last Name must be between 1 and 32 characters!')]")).isDisplayed(), "El error de Last Name no se ha mostrado.");
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), 'Address must be between 3 and 128 characters!')]")).isDisplayed(), "El error de Address no se ha mostrado.");
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), 'City must be between 2 and 128 characters!')]")).isDisplayed(), "El error de City no se ha mostrado.");
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(text(), 'Please select a region / state!')]")).isDisplayed(), "El error de Region no se ha mostrado.");
-    }
+	// Rellena el formulario con los campos proporcionados
+	private void fillForm(Map<String, String> fields) {
+	    fields.forEach((key, value) -> {
+	        // Encuentra el campo de formulario usando el ID
+	        WebElement element = driver.findElement(By.id(key));
 
-    @When("El usuario agrega una nueva dirección con:")
-    public void el_usuario_agrega_una_nueva_direccion(Map<String, String> addressDetails) {
-        driver.findElement(By.cssSelector("a.btn.btn-primary")).click(); // Hacer clic en "Añadir nueva dirección"
+	        // Verifica si el campo es un <select> (menú desplegable)
+	        if (element.getTagName().equals("select")) {
+	            // Si es un <select>, selecciona el valor visible
+	            new Select(element).selectByVisibleText(value);
+	            // Se aplica un tiempo de espera explícito para asegurar la carga de los elementos
+	            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	        } else {
+	            // Si no es un <select>, ingresa el valor usando sendKeys
+	            element.clear();
+	            element.sendKeys(value);
+	        }
+	    });
+	}
 
-        driver.findElement(By.id("input-firstname")).sendKeys(addressDetails.get("Nombre"));
-        driver.findElement(By.id("input-lastname")).sendKeys(addressDetails.get("Apellido"));
-        driver.findElement(By.id("input-company")).sendKeys(addressDetails.get("Empresa"));
-        driver.findElement(By.id("input-address-1")).sendKeys(addressDetails.get("Dirección 1"));
-        driver.findElement(By.id("input-address-2")).sendKeys(addressDetails.get("Dirección 2"));
-        driver.findElement(By.id("input-city")).sendKeys(addressDetails.get("Ciudad"));
-        driver.findElement(By.id("input-postcode")).sendKeys(addressDetails.get("Código Postal"));
+	// Selecciona un valor de un menú desplegable por índice
+	private void selectDropdownByIndex(By locator, int index) {
+	    WebElement dropdown = driver.findElement(locator);
+	    new Select(dropdown).selectByIndex(index);
+	}
 
-        // Seleccionar país del menú desplegable
-        WebElement countryDropdown = driver.findElement(By.id("input-country"));
-        Select selectCountry = new Select(countryDropdown);
-        selectCountry.selectByVisibleText(addressDetails.get("País"));
+	// Verifica si la dirección esperada aparece en la lista de direcciones
+	private boolean verifyAddressInList(String[] expectedAddress) {
+	    List<WebElement> rows = driver.findElements(By.cssSelector("table.table-bordered tbody tr"));
+	    for (WebElement row : rows) {
+	        String cellText = row.findElement(By.cssSelector("td.text-left")).getText();
+	        // Compara la dirección en cada fila con la dirección esperada
+	        if (isAddressMatching(cellText, expectedAddress)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	// Compara si la dirección mostrada en la tabla coincide con la dirección esperada
+	private boolean isAddressMatching(String cellText, String[] expectedAddress) {
+	    for (String field : expectedAddress) {
+	        if (!cellText.contains(field)) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
 
-        // Seleccionar región/estado del menú desplegable
-        WebElement zoneDropdown = driver.findElement(By.id("input-zone"));
-        Select selectZone = new Select(zoneDropdown);
-        selectZone.selectByVisibleText(addressDetails.get("Región/Estado"));
+	// Realiza una acción (clic en un botón) sobre la dirección que coincide con la dirección esperada
+	private void performActionOnAddress(String[] expectedAddress, By actionButtonLocator) {
+	    List<WebElement> rows = driver.findElements(By.cssSelector("table.table-bordered tbody tr"));
+	    for (WebElement row : rows) {
+	        String cellText = row.findElement(By.cssSelector("td.text-left")).getText();
+	        // Si la dirección coincide, realiza la acción (clic en el botón)
+	        if (isAddressMatching(cellText, expectedAddress)) {
+	            row.findElement(actionButtonLocator).click();
+	            break;
+	        }
+	    }
+	}
 
-        driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click();
-    }
+	@Given("El usuario está logeado en su cuenta 3")
+	public void el_usuario_esta_logeado_en_su_cuenta3(Map<String, String> userDetails) {
+	    driver.navigate().to("https://opencart.abstracta.us/index.php?route=common/home");
+	    clickButton(By.cssSelector("a[title='My Account']"));
+	    clickButton(By.linkText("Login"));
+	    fillForm(userDetails);
+	    clickButton(By.cssSelector("input.btn.btn-primary[value='Login']"));
+	}
 
-    @Then("La dirección debería ser guardada y aparecer en la lista de direcciones del usuario")
-    public void la_direccion_deberia_ser_guardada() {
-        // Verificar que la dirección se ha guardado correctamente
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible' and contains(text(), 'Your address has been successfully added')]")).isDisplayed(),
-                "La dirección no se ha guardado correctamente.");
-    }
+	@When("El usuario hace clic en el enlace {string} 3")
+	public void el_usuario_hace_clic_en_el_enlace(String linkText) {
+	    clickButton(By.partialLinkText(linkText));
+	}
 
-    @When("El usuario intenta editar una dirección borrando la información de todos los campos")
-    public void el_usuario_intenta_editar_borrando_campos() {
-        WebElement editButton = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr[2]/td[2]/a[1]"));
-        editButton.click();
+	@When("El usuario intenta agregar una nueva dirección sin completar ningún campo")
+	public void tryAddingEmptyAddress() {
+	    clickButton(By.cssSelector("a.btn.btn-primary")); // Add new address
+	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']")); // Submit empty form
+	}
 
-        // Borrar todos los campos
-        driver.findElement(By.id("input-firstname")).clear();
-        driver.findElement(By.id("input-lastname")).clear();
-        driver.findElement(By.id("input-company")).clear();
-        driver.findElement(By.id("input-address-1")).clear();
-        driver.findElement(By.id("input-address-2")).clear();
-        driver.findElement(By.id("input-city")).clear();
-        driver.findElement(By.id("input-postcode")).clear();
+	@Then("El sistema debería mostrar un error indicando que todos los campos son obligatorios")
+	public void verifyAllFieldsError() {
+	    verifyErrorMessages(List.of(
+	        "First Name must be between 1 and 32 characters!",
+	        "Last Name must be between 1 and 32 characters!",
+	        "Address must be between 3 and 128 characters!",
+	        "City must be between 2 and 128 characters!",
+	        "Please select a region / state!"
+	    ));
+	}
 
-        // Intentar enviar el formulario con la opción vacía seleccionada en las listas desplegables
-        WebElement countryDropdown = driver.findElement(By.id("input-country"));
-        Select selectCountry = new Select(countryDropdown);
-        selectCountry.selectByIndex(0); // Seleccionar la primera opción en el menú desplegable "País"
+	@When("El usuario agrega una nueva dirección con:")
+	public void addNewAddress(Map<String, String> addressDetails) {
+	    clickButton(By.cssSelector("a.btn.btn-primary"));
+	    fillForm(addressDetails);
+	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']"));
+	}
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	@Then("La dirección debería ser guardada y aparecer en la lista de direcciones del usuario")
+	public void verifyAddressSaved() {
+	    Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible' and contains(text(), 'Your address has been successfully added')]")).isDisplayed(),
+	            "La dirección no se ha guardado correctamente.");
+
+	    // Valores esperados para la dirección
+        String[] expectedAddress = {
+            "Javier David",
+            "MiEmpresa",
+            "Calle Falsa 123",
+            "Piso 3, Puerta A",
+            "Madrid 28000",
+            "Madrid",
+            "Spain"
+        };
         
-        WebElement zoneDropdown = driver.findElement(By.id("input-zone"));
-        Select selectZone = new Select(zoneDropdown);
-        selectZone.selectByIndex(0); // Seleccionar la primera opción en el menú desplegable "Región/Estado"
+	    Assert.assertTrue(verifyAddressInList(expectedAddress),
+	            "La dirección esperada no fue encontrada o no coincide en todos los campos.");
+	}
 
-        driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click();
-    }
+	@When("El usuario intenta editar una dirección borrando la información de todos los campos")
+	public void el_usuario_intenta_editar_borrando_campos() {
+		
+		// Valores esperados para la dirección
+        String[] expectedAddress = {
+            "Javier David",
+            "MiEmpresa",
+            "Calle Falsa 123",
+            "Piso 3, Puerta A",
+            "Madrid 28000",
+            "Madrid",
+            "Spain"
+        };
 
-    @When("El usuario edita la dirección a:")
-    public void el_usuario_edita_la_direccion(Map<String, String> updatedAddress) {
-        // Localizar el enlace "Edit" basado en la dirección de la calle
-        WebElement editButton = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr[2]/td[2]/a[1]"));
-        editButton.click();
+	    performActionOnAddress(expectedAddress, By.cssSelector("a.btn-info"));
 
-        driver.findElement(By.id("input-firstname")).clear();
-        driver.findElement(By.id("input-firstname")).sendKeys(updatedAddress.get("Nombre"));
-        driver.findElement(By.id("input-lastname")).clear();
-        driver.findElement(By.id("input-lastname")).sendKeys(updatedAddress.get("Apellido"));
-        driver.findElement(By.id("input-company")).clear();
-        driver.findElement(By.id("input-company")).sendKeys(updatedAddress.get("Empresa"));
-        driver.findElement(By.id("input-address-1")).clear();
-        driver.findElement(By.id("input-address-1")).sendKeys(updatedAddress.get("Dirección 1"));
-        driver.findElement(By.id("input-address-2")).clear();
-        driver.findElement(By.id("input-address-2")).sendKeys(updatedAddress.get("Dirección 2"));
-        driver.findElement(By.id("input-city")).clear();
-        driver.findElement(By.id("input-city")).sendKeys(updatedAddress.get("Ciudad"));
-        driver.findElement(By.id("input-postcode")).clear();
-        driver.findElement(By.id("input-postcode")).sendKeys(updatedAddress.get("Código Postal"));
+	    // Borra los campos de la dirección
+	    driver.findElement(By.id("input-firstname")).clear();
+	    driver.findElement(By.id("input-lastname")).clear();
+	    driver.findElement(By.id("input-company")).clear();
+	    driver.findElement(By.id("input-address-1")).clear();
+	    driver.findElement(By.id("input-address-2")).clear();
+	    driver.findElement(By.id("input-city")).clear();
+	    driver.findElement(By.id("input-postcode")).clear();
 
-        // Seleccionar país y región/estado actualizados
-        WebElement countryDropdown = driver.findElement(By.id("input-country"));
-        Select selectCountry = new Select(countryDropdown);
-        selectCountry.selectByVisibleText(updatedAddress.get("País"));
+	    selectDropdownByIndex(By.id("input-country"), 0);
+	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	    selectDropdownByIndex(By.id("input-zone"), 0);
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']"));
+	}
+	
+	@When("El usuario edita la dirección a:")
+	public void editAddress(Map<String, String> updatedAddress) {
+	    
+		// Valores esperados para la dirección
+	    String[] expectedAddress = {
+	        "Javier David",
+	        "MiEmpresa",
+	        "Calle Falsa 123",
+	        "Piso 3, Puerta A",
+	        "Madrid 28000",
+	        "Madrid",
+	        "Spain"
+	    };
+	    
+	    performActionOnAddress(expectedAddress, By.cssSelector("a.btn-info"));
+	    fillForm(updatedAddress);
+	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']"));
+	}
 
-        WebElement zoneDropdown = driver.findElement(By.id("input-zone"));
-        Select selectZone = new Select(zoneDropdown);
-        selectZone.selectByVisibleText(updatedAddress.get("Región/Estado"));
+	@Then("La dirección debería ser actualizada correctamente en la cuenta del usuario")
+	public void verifyAddressUpdated() {
+	    Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible' and contains(text(), 'Your address has been successfully updated')]")).isDisplayed(),
+	            "La dirección no se ha actualizado correctamente.");
 
-        driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click();
-    }
+	    // Valores esperados para la dirección
+        String[] updatedAddress = {
+            "David Javier",
+            "MiNuevaEmpresa",
+            "Calle Verdadera 456",
+            "Piso 4, Puerta B",
+            "Barcelona 28001",
+            "Barcelona",
+            "Spain"
+        };
+        
+	    Assert.assertTrue(verifyAddressInList(updatedAddress),
+	            "La dirección actualizada no fue encontrada o no coincide en todos los campos.");
+	}
 
-    @Then("La dirección debería ser actualizada correctamente en la cuenta del usuario")
-    public void la_direccion_deberia_ser_actualizada() {
-        // Verificar si el mensaje de éxito es visible
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible' and contains(text(), 'Your address has been successfully updated')]")).isDisplayed(),
-                "La dirección no se ha actualizado correctamente.");
-    }
+	@When("El usuario elimina la dirección")
+	public void deleteAddress() {
+		
+		// Valores esperados para la dirección
+        String[] addressToDelete = {
+            "David Javier",
+            "MiNuevaEmpresa",
+            "Calle Verdadera 456",
+            "Piso 4, Puerta B",
+            "Barcelona 28001",
+            "Barcelona",
+            "Spain"
+        };
+        
+	    performActionOnAddress(addressToDelete, By.cssSelector("a.btn-danger"));
+	}
 
-    @When("El usuario elimina la dirección")
-    public void el_usuario_elimina_la_direccion() {
-        // Localizar el enlace "Delete" basado en la dirección de la calle
-        driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr[2]/td[2]/a[2]")).click();
-    }
+	@Then("La dirección debería ser eliminada y ya no aparecer en la lista de direcciones")
+	public void verifyAddressDeleted() {
+	    Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible' and contains(text(), 'Your address has been successfully deleted')]")).isDisplayed(),
+	            "La dirección no se ha eliminado correctamente.");
 
-    @Then("La dirección debería ser eliminada y ya no aparecer en la lista de direcciones")
-    public void la_direccion_deberia_ser_eliminada() {
-        // Verificar que el mensaje de éxito es visible
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible' and contains(text(), 'Your address has been successfully deleted')]")).isDisplayed(),
-                "La dirección no se ha eliminado correctamente.");
-    }
+	    // Valores esperados para la dirección
+        String[] addressToDelete = {
+            "David Javier",
+            "MiNuevaEmpresa",
+            "Calle Verdadera 456",
+            "Piso 4, Puerta B",
+            "Barcelona 28001",
+            "Barcelona",
+            "Spain"
+        };
+        
+	    Assert.assertFalse(verifyAddressInList(addressToDelete),
+	            "La dirección borrada fue encontrada en el Address Book.");
+	}
 
-    @When("El usuario intenta eliminar la única dirección que tiene")
-    public void el_usuario_intenta_eliminar_la_unica_direccion() {
-        // Eliminar la única dirección disponible
-        driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/table/tbody/tr/td[2]/a[2]")).click();
-    }
+	@When("El usuario intenta eliminar la única dirección que tiene")
+	public void tryDeletingDefaultAddress() {
+	    clickButton(By.cssSelector("a.btn-danger")); // Asume que solo hay una dirección
+	}
 
-    @Then("El sistema debería mostrar un error indicando que no se puede eliminar la última dirección")
-    public void el_sistema_deberia_mostrar_error_no_se_puede_eliminar() {
-        // Verificar si el error es visible
-        Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class, 'alert-warning') and contains(text(), 'Warning: You can not delete your default address!')]")).isDisplayed(),
-        		"El mensaje de advertencia no se ha mostrado.");
-    }
+	@Then("El sistema debería mostrar un error indicando que no se puede eliminar la última dirección")
+	public void verifyCannotDeleteLastAddress() {
+	    Assert.assertTrue(driver.findElement(By.xpath("//div[contains(@class, 'alert-warning')]")).isDisplayed(),
+	        "El mensaje de advertencia no se ha mostrado.");
+	    
+	    // Valores esperados para la dirección
+        String[] expectedAddress = {
+            "r r",
+            "r",
+            "rrr",
+            "r",
+            "rr 1r",
+            "Angus",
+            "United Kingdom"
+        };
+        
+	    Assert.assertTrue(verifyAddressInList(expectedAddress),
+	            "La dirección actualizada no fue encontrada o no coincide en todos los campos.");
+	}
 }
