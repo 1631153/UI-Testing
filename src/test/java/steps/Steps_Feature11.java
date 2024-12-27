@@ -88,12 +88,19 @@ public class Steps_Feature11 {
         // Hace clic en el botón de continuar para guardar la nueva contraseña
     	clickButton(By.cssSelector("input[type='submit']"));
     }
+    
+    @Then("El sistema debería mostrar un mensaje de error en la contraseña")
+    public void el_sistema_debería_mostrar_un_mensaje_de_error_en_la_contraseña() {
+        // Verifica que el mensaje de error se ha mostrado
+    	By errorLocator = By.xpath("//div[contains(@class, 'text-danger') and contains(text(), 'Password must be between 4 and 20 characters!')]");
+		Assert.assertTrue(driver.findElement(errorLocator).isDisplayed(), "El mensaje de error no se ha mostrado.");
+    }
 
     @Then("El sistema debería mostrar un mensaje de error indicando que las contraseñas no coinciden")
     public void el_sistema_debería_mostrar_un_mensaje_de_error_indicando_que_las_contraseñas_no_coinciden() {
         // Verifica que el mensaje de error se ha mostrado
-        boolean mensajeErrorVisible = driver.findElements(By.xpath("//div[contains(@class, 'text-danger')]")).size() > 0;
-        Assert.assertTrue(mensajeErrorVisible, "El mensaje de error no se ha mostrado.");
+    	By errorLocator = By.xpath("//div[contains(@class, 'text-danger') and contains(text(), 'Password confirmation does not match password!')]");
+		Assert.assertTrue(driver.findElement(errorLocator).isDisplayed(), "El mensaje de error no se ha mostrado.");
     }
 
     @Then("La contraseña del usuario debería cambiarse con éxito")

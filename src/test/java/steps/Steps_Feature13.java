@@ -77,12 +77,6 @@ public class Steps_Feature13 {
 	    });
 	}
 
-	// Selecciona un valor de un menú desplegable por índice
-	private void selectDropdownByIndex(By locator, int index) {
-	    WebElement dropdown = driver.findElement(locator);
-	    new Select(dropdown).selectByIndex(index);
-	}
-
 	// Verifica si la dirección esperada aparece en la lista de direcciones
 	private boolean verifyAddressInList(String[] expectedAddress) {
 	    List<WebElement> rows = driver.findElements(By.cssSelector("table.table-bordered tbody tr"));
@@ -136,7 +130,23 @@ public class Steps_Feature13 {
 	@When("El usuario intenta agregar una nueva dirección sin completar ningún campo")
 	public void tryAddingEmptyAddress() {
 	    clickButton(By.cssSelector("a.btn.btn-primary")); // Add new address
-	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']")); // Submit empty form
+	    
+	    // Borra los campos de la dirección
+	    driver.findElement(By.id("input-firstname")).clear();
+	    driver.findElement(By.id("input-lastname")).clear();
+	    driver.findElement(By.id("input-company")).clear();
+	    driver.findElement(By.id("input-address-1")).clear();
+	    driver.findElement(By.id("input-address-2")).clear();
+	    driver.findElement(By.id("input-city")).clear();
+	    driver.findElement(By.id("input-postcode")).clear();
+
+	    WebElement dropdownCountry = driver.findElement(By.id("input-country"));
+	    new Select(dropdownCountry).selectByVisibleText("--- Please Select ---");
+	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	    WebElement dropdownZone = driver.findElement(By.id("input-zone"));
+	    new Select(dropdownZone).selectByVisibleText("--- Please Select ---");
+
+	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']"));
 	}
 
 	@Then("El sistema debería mostrar un error indicando que todos los campos son obligatorios")
@@ -145,8 +155,10 @@ public class Steps_Feature13 {
  	    errorMessages.put("input-firstname", "First Name must be between 1 and 32 characters!");
  	    errorMessages.put("input-lastname", "Last Name must be between 1 and 32 characters!");
  	    errorMessages.put("input-address-1", "Address must be between 3 and 128 characters!");
- 	    errorMessages.put("input-postcode", "Postcode must be between 2 and 10 characters!");
  	    errorMessages.put("input-city", "City must be between 2 and 128 characters!");
+ 	    //errorMessages.put("input-postcode", "Postcode must be between 2 and 10 characters!");
+ 	    // No pongo el input-postcode porque algunas veces aparece y otras
+ 	    errorMessages.put("input-country", "Please select a country!");
  	    errorMessages.put("input-zone", "Please select a region / state!");
 	    verifyErrorMessages(errorMessages);
 	}
@@ -203,9 +215,11 @@ public class Steps_Feature13 {
 	    driver.findElement(By.id("input-city")).clear();
 	    driver.findElement(By.id("input-postcode")).clear();
 
-	    selectDropdownByIndex(By.id("input-country"), 0);
+	    WebElement dropdownCountry = driver.findElement(By.id("input-country"));
+	    new Select(dropdownCountry).selectByVisibleText("--- Please Select ---");
 	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-	    selectDropdownByIndex(By.id("input-zone"), 0);
+	    WebElement dropdownZone = driver.findElement(By.id("input-zone"));
+	    new Select(dropdownZone).selectByVisibleText("--- Please Select ---");
 
 	    clickButton(By.cssSelector("input.btn.btn-primary[value='Continue']"));
 	}

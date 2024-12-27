@@ -29,6 +29,15 @@ Feature: Gestión de la contraseña de la cuenta
     And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
     Then La contraseña del usuario debería cambiarse con éxito
 
+	# Escenario para intentar cambiar la contraseña sin escribir ninguna contraseña
+  Scenario: Intentar cambiar la contraseña sin confirmar la nueva contraseña
+    Given El usuario está logeado en su cuenta
+      | input-email            | javi.david@test.com |
+      | input-password         | Password123         |
+    When El usuario hace clic en el enlace "Password"
+		And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
+    Then El sistema debería mostrar un mensaje de error en la contraseña
+
 	# Escenario para intentar cambiar la contraseña sin confirmar la nueva contraseña
   Scenario: Intentar cambiar la contraseña sin confirmar la nueva contraseña
     Given El usuario está logeado en su cuenta
@@ -39,6 +48,18 @@ Feature: Gestión de la contraseña de la cuenta
       | input-password         | NuevaPass45         |
 		And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
     Then El sistema debería mostrar un mensaje de error indicando que las contraseñas no coinciden
+    
+  # Escenario para intentar cambiar la contraseña escribiendo solo un caracter sin confirmar la nueva contraseña
+  Scenario: Intentar cambiar la contraseña con un caracter sin confirmar la nueva contraseña
+    Given El usuario está logeado en su cuenta
+      | input-email            | javi.david@test.com |
+      | input-password         | Password123         |
+    When El usuario hace clic en el enlace "Password"
+		And El usuario introduce una nueva contraseña:
+      | input-password         | a                   |
+		And El usuario hace clic en el botón de continuar para guardar la nueva contraseña
+		Then El sistema debería mostrar un mensaje de error en la contraseña
+    And El sistema debería mostrar un mensaje de error indicando que las contraseñas no coinciden
 
   # Escenario para intentar cambiar la contraseña con contraseñas que no coinciden
   Scenario: Intentar cambiar la contraseña con contraseñas que no coinciden

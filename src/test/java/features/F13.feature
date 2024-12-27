@@ -19,15 +19,15 @@ Feature: Gestionar direcciones de envío
       | input-password         | Password123         |
     When El usuario hace clic en el enlace "Address Book" 3
     And El usuario agrega una nueva dirección con:
-      | input-firstname        | Javier             |
-      | input-lastname         | David              |
-      | input-company          | MiEmpresa          |
-      | input-address-1        | Calle Falsa 123    |
-      | input-address-2        | Piso 3, Puerta A   |
-      | input-city             | Madrid             |
-      | input-postcode         | 28000              |
-      | input-country          | Spain              |
-      | input-zone             | Madrid             |
+      | input-firstname        | Javier              |
+      | input-lastname         | David               |
+      | input-company          | MiEmpresa           |
+      | input-address-1        | Calle Falsa 123     |
+      | input-address-2        | Piso 3, Puerta A    |
+      | input-city             | Madrid              |
+      | input-postcode         | 28000               |
+      | input-country          | Spain               |
+      | input-zone             | Madrid              |
     Then La dirección debería ser guardada y aparecer en la lista de direcciones del usuario
 
   # Escenario para intentar editar una dirección borrando la información de todos los campos
@@ -39,6 +39,24 @@ Feature: Gestionar direcciones de envío
     And El usuario intenta editar una dirección borrando la información de todos los campos
     Then El sistema debería mostrar un error indicando que todos los campos son obligatorios
     
+  # Escenario para editar una dirección existente exediendo el limite de caracteres de los campos
+  Scenario: Editar una dirección existente exediendo el limite de caracteres de los campos
+    Given El usuario está logeado en su cuenta 3
+      | input-email            | javi.david@test.com |
+      | input-password         | Password123         |
+    When El usuario hace clic en el enlace "Address Book" 3
+    And El usuario edita la dirección a:
+      | input-firstname        | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+      | input-lastname         | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+      | input-company          | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+      | input-address-1        | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+      | input-address-2        | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+      | input-city             | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+      | input-postcode         | 01234567890         |
+      | input-country          | --- Please Select --- |
+      | input-zone             | --- Please Select --- |
+    Then El sistema debería mostrar un error indicando que todos los campos son obligatorios
+   
   # Escenario para editar una dirección existente
   Scenario: Editar una dirección existente
     Given El usuario está logeado en su cuenta 3
@@ -46,15 +64,15 @@ Feature: Gestionar direcciones de envío
       | input-password         | Password123         |
     When El usuario hace clic en el enlace "Address Book" 3
     And El usuario edita la dirección a:
-      | input-firstname        | David              |
-      | input-lastname         | Javier             |
-      | input-company          | MiNuevaEmpresa     |
-      | input-address-1        | Calle Verdadera 456|
-      | input-address-2        | Piso 4, Puerta B   |
-      | input-city             | Barcelona          |
-      | input-postcode         | 28001              |
-      | input-country          | Spain              |
-      | input-zone             | Barcelona          |
+      | input-firstname        | David               |
+      | input-lastname         | Javier              |
+      | input-company          | MiNuevaEmpresa      |
+      | input-address-1        | Calle Verdadera 456 |
+      | input-address-2        | Piso 4, Puerta B    |
+      | input-city             | Barcelona           |
+      | input-postcode         | 28001               |
+      | input-country          | Spain               |
+      | input-zone             | Barcelona           |
     Then La dirección debería ser actualizada correctamente en la cuenta del usuario
 
   # Escenario para eliminar una dirección de envío

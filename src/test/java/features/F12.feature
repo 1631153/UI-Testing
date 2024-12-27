@@ -41,3 +41,16 @@ Feature: Gestión de la información personal de la cuenta
     When El usuario hace clic en el enlace "Edit Account" 2
     And El usuario deja los campos vacíos y hace clic en "Continue"
     Then El sistema debería mostrar los mensajes de error correspondientes
+    
+	# Escenario para actualizar la información personal exediendo los limites de caracteres
+  Scenario: Actualizar la información personal con datos inválidos
+    Given El usuario está logeado en su cuenta 2
+      | input-email            | javi.david@test.com |
+      | input-password         | Password123         |
+    When El usuario hace clic en el enlace "Edit Account" 2
+    And El usuario actualiza su información personal con
+      | input-firstname        | JaviJaviJaviJaviJaviJaviJaviJaviJavi |
+      | input-lastname         | DavidDavidDavidDavidDavidDavidDavid  |
+      | input-email            | d@t                                  |
+      | input-telephone        | 123456789123456789123456789123456    |
+    Then El sistema debería mostrar los mensajes de error correspondientes
