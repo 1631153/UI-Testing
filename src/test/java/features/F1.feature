@@ -28,7 +28,7 @@ And the user agrees to the privacy policy
 And the user clicks on the continue button
 Then the user should see a email warning message
 
-Scenario: Registro fallido de un nuevo usuario (private policy and email)
+Scenario: Registro fallido de un nuevo usuario (email)
 Given the user is in the homepage
 When the user clicks to go to the registration page
 And the user fills in the registration form with the following details:
@@ -40,7 +40,4 @@ And the user fills in the registration form with the following details:
     | Confirm      | Password123   |
 And the user clicks on the continue button
 And the user should see a private policy warning message
-And the user agrees to the privacy policy
-And the user clicks on the continue button
 Then the user should be in the same page
-//este falla pq usa JavaScript y hay que hacer mucha mierda

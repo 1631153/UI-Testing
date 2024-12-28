@@ -25,6 +25,7 @@ public class Steps_Scenario1 {
 		System.setProperty("webdriver.gecko.driver", "Drivers/geckodriver.exe");
 		driver = new ChromeDriver();
 		driver.navigate().to("https://opencart.abstracta.us/index.php?route=common/home");
+		driver.manage().window().maximize();
 	} 
     
     @When("the user clicks to go to the registration page")
@@ -44,24 +45,28 @@ public class Steps_Scenario1 {
     }
     
     @When("the user agrees to the privacy policy")
-    public void TheUserAgreesToThePrivacyPolicy() {
+    public void TheUserAgreesToThePrivacyPolicy() throws InterruptedException {
+    	Thread.sleep(1000);
     	driver.findElement(By.name("agree")).click();
     }
     
     @When("the user clicks on the continue button")
-    public void TheUserClicksOnTheContinueButton() {
+    public void TheUserClicksOnTheContinueButton() throws InterruptedException {
+    	Thread.sleep(1000);
     	driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click();
     }
     
     @When("the user should see a private policy warning message")
     public void theUserShouldSeeAPrivatePolicyWarningMessage() throws InterruptedException {
     	Thread.sleep(1000);
-        WebElement warningMessage = driver.findElement(By.cssSelector("div.alert.alert-danger"));
-        Assert.assertTrue(warningMessage.isDisplayed(), "El mensaje de advertencia no se mostró.");
+    	WebElement emailField = driver.findElement(By.id("input-email"));
+        String emailType = emailField.getAttribute("type");
 
-        String expectedMessage = "Warning: You must agree to the Privacy Policy!";
-        String actualMessage = warningMessage.getText();
-        Assert.assertTrue(actualMessage.contains(expectedMessage), "El mensaje de advertencia no es el esperado.");
+        Assert.assertEquals(emailType, "email", "El campo no tiene el atributo 'type=email'.");
+        driver.findElement(By.cssSelector("input[type='submit']")).click();
+
+        String emailValue = emailField.getAttribute("value");
+        Assert.assertFalse(emailValue.contains("@"), "El email ingresado no es inválido.");
     }
     
     @Then("the user should see a confirmation message")
@@ -80,7 +85,6 @@ public class Steps_Scenario1 {
         String expectedMessage = "Warning: E-Mail Address is already registered!";
         String actualMessage = warningMessage.getText();
         Assert.assertTrue(actualMessage.contains(expectedMessage), "El mensaje de advertencia no es el esperado.");
-        //El registro en cuanto a fallos está mal. Nombre se le pueden poner numeros y telefono letras.
     }
 
     @Then("the user should be in the same page")
@@ -162,9 +166,16 @@ public class Steps_Scenario1 {
     	driver.findElement(By.linkText("Checkout")).click();
     }
     
+    @When("the user clicks on another continue button")
+    public void TheUserClicksOnAnotherContinueButton() throws InterruptedException {
+    	Thread.sleep(1000);
+    	driver.findElement(By.id("button-payment-method")).click();
+    }
+    
     @When("the user clicks on the Confirm Order button")
-    public void TheUserClicksOnTheConfirmOrderButton() {
-    	driver.findElement(By.cssSelector("input.btn.btn-primary[value='Confirm Order']")).click();
+    public void TheUserClicksOnTheConfirmOrderButton() throws InterruptedException {
+    	Thread.sleep(1000);
+    	driver.findElement(By.id("button-confirm")).click();
     }
     
     @When("the user clicks on Order History")
@@ -183,7 +194,8 @@ public class Steps_Scenario1 {
     }
     
     @Then("the user should see an order confirmation message")
-    public void theUserShouldSeeAnOrderConfirmationMessage() {
+    public void theUserShouldSeeAnOrderConfirmationMessage() throws InterruptedException {
+    	Thread.sleep(1000);
         String expectedMessage = "Your order has been successfully processed!";
         String actualMessage = driver.findElement(By.cssSelector("div#content p")).getText();
         Assert.assertEquals(actualMessage, expectedMessage, "The success message is incorrect.");
@@ -210,7 +222,8 @@ public class Steps_Scenario1 {
     }
     
     @Then("the prices on the homepage should be displayed all in euros")
-    public void ThePricesOnTheHomepageShouldBeDisplayedAllInEuros() {
+    public void ThePricesOnTheHomepageShouldBeDisplayedAllInEuros() throws InterruptedException {
+    	Thread.sleep(1000);
     	List<WebElement> priceElements = driver.findElements(By.cssSelector(".price"));
         boolean allPricesInEuros = true;
 

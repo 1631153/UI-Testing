@@ -19,7 +19,7 @@ Given the user is in the Shopping Cart page
 When the user clicks on Checkout button
 And the user clicks on the continue button
 And the user agrees to the privacy policy
-And the user clicks on the continue button
+And the user clicks on another continue button
 And the user clicks on the Confirm Order button
 Then the user should see an order confirmation message
 
