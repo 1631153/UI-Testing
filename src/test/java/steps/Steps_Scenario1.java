@@ -93,9 +93,6 @@ public class Steps_Scenario1 {
     	Assert.assertEquals("https://opencart.abstracta.us/index.php?route=account/register", driver.getCurrentUrl(), "La pagina actual no es la correcta.");
     }
     
-    
-
-    
     //Scenario 2
     @When("the user clicks to go to the login page")
     public void TheUserClicksToGoToTheLoginPage() {
@@ -213,7 +210,6 @@ public class Steps_Scenario1 {
         Assert.assertEquals(dateText, today.format(formatter), "La fecha del último pedido no es la de hoy.");
     }
 
-    
     //Scenario 4
     @When("the user clicks on the currency dropdown to select Euro")
     public void TheUserClicksOnTheCurrencyDropdownToSelectEuro() {
@@ -234,12 +230,41 @@ public class Steps_Scenario1 {
                 break;
             }
         }
-
         Assert.assertTrue(allPricesInEuros, "No todos los precios están en euros.");
-    	
     }
 
-
+    //Scenario 5
+    @When("the user clicks on forgotten password")
+    public void TheUserClicksOnForgottenPassword() {
+    	driver.findElement(By.linkText("Forgotten Password")).click();
+    }
+    
+    @When("the user fills email:")
+    public void theUserFillsEmail(Map<String, String> userDetails) {
+        driver.findElement(By.id("input-email")).sendKeys(userDetails.get("Email"));
+    }
+    
+    @Then("the user should see a confirmation message on another page")
+    public void TheUserShouldSeeAConfirmationMessageOnAnotherPage() throws InterruptedException {
+    	Thread.sleep(1000);
+    	String expectedMessage = "An email with a confirmation link has been sent your email address.";
+    	String successMessage = driver.findElement(By.cssSelector("div.alert.alert-success.alert-dismissible")).getText();
+        Assert.assertEquals(expectedMessage, successMessage, "El mensaje de confirmacion no se mostró.");
+        
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://opencart.abstracta.us/index.php?route=account/login", "No se redirigió correctamente a la página de inicio de sesión.");
+    }
+    
+    @Then("the user should see a warning message on the same page")
+    public void TheUserShouldSeeAWarningMessageOnTheSamePage() throws InterruptedException {
+    	Thread.sleep(1000);
+    	String expectedMessage = "Warning: The E-Mail Address was not found in our records, please try again!";
+    	String successMessage = driver.findElement(By.cssSelector("div.alert.alert-danger.alert-dismissible")).getText();
+        Assert.assertEquals(expectedMessage, successMessage, "El mensaje de aviso no se mostró.");
+        
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://opencart.abstracta.us/index.php?route=account/forgotten", "La pagina actual no es la correcta.");
+    }
 
 
     
