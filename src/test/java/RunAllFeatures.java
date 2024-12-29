@@ -1,0 +1,18 @@
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
+
+
+@CucumberOptions(
+	features = {
+			"src/test/java/features/F09.feature",
+			"src/test/java/features/F10.feature",
+			"src/test/java/features/F11.feature",
+			"src/test/java/features/F12.feature",
+			"src/test/java/features/F13.feature",
+			"src/test/java/features/F14.feature",
+			"src/test/java/features/F15.feature"
+	},  								// Directorio que contiene todas las features
+    glue = "steps"                      // Paquete con los step definitions
+)
+public class RunAllFeatures extends AbstractTestNGCucumberTests {
+}

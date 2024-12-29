@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Run_Feature13">
+      <class name="RunAllFeatures">
         <methods>
           <include name="setUpClass"/>
-          <include name="runScenario" invocation-numbers="0 2 3"/>
+          <include name="runScenario" invocation-numbers="39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54"/>
           <include name="tearDownClass"/>
         </methods>
-      </class> <!-- Run_Feature13 -->
+      </class> <!-- RunAllFeatures -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
