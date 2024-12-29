@@ -11,7 +11,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import io.cucumber.java.After;
@@ -406,7 +408,7 @@ public class Steps_Feature {
     
 	//Feature13
 
-	@When("El usuario intenta agregar una nueva dirección sin completar ningún campo")
+   	@When("El usuario intenta agregar una nueva dirección sin completar ningún campo")
 	public void tryAddingEmptyAddress() {
 	    clickButton(By.cssSelector("a.btn.btn-primary")); // Add new address
 	    
@@ -419,9 +421,10 @@ public class Steps_Feature {
 	    driver.findElement(By.id("input-city")).clear();
 	    driver.findElement(By.id("input-postcode")).clear();
 
+	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 	    WebElement dropdownCountry = driver.findElement(By.id("input-country"));
 	    new Select(dropdownCountry).selectByVisibleText("--- Please Select ---");
-	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 	    WebElement dropdownZone = driver.findElement(By.id("input-zone"));
 	    new Select(dropdownZone).selectByVisibleText("--- Please Select ---");
 
@@ -438,8 +441,7 @@ public class Steps_Feature {
  	    //errorMessages.put("input-postcode", "Postcode must be between 2 and 10 characters!");
  	    // No pongo el input-postcode porque algunas veces aparece y otras
  	    errorMessages.put("input-country", "Please select a country!");
- 	    //errorMessages.put("input-zone", "Please select a region / state!");
- 	    // No pongo el input-zone porque no puedo editarlo de manera comfiable, no se porque
+ 	    errorMessages.put("input-zone", "Please select a region / state!");
 	    verifyErrorMessages(errorMessages);
 	}
 
@@ -607,7 +609,7 @@ public class Steps_Feature {
    	
    	// Verifica si la dirección esperada aparece en la lista de direcciones
  	private boolean verifyAddressInList(String[] expectedAddress) {
- 	    List<WebElement> rows = driver.findElements(By.cssSelector("table.table-bordered tbody tr"));
+ 	    List<WebElement> rows = driver.findElements(By.cssSelector("#content > div.table-responsive > table > tbody > tr"));
  	    for (WebElement row : rows) {
  	        String cellText = row.findElement(By.cssSelector("td.text-left")).getText();
  	        // Compara la dirección en cada fila con la dirección esperada
@@ -627,10 +629,10 @@ public class Steps_Feature {
  	    }
  	    return true;
  	}
-
+ 	
  	// Realiza una acción (clic en un botón) sobre la dirección que coincide con la dirección esperada
  	private void performActionOnAddress(String[] expectedAddress, By actionButtonLocator) {
- 	    List<WebElement> rows = driver.findElements(By.cssSelector("table.table-bordered tbody tr"));
+ 	    List<WebElement> rows = driver.findElements(By.cssSelector("#content > div.table-responsive > table > tbody > tr"));
  	    for (WebElement row : rows) {
  	        String cellText = row.findElement(By.cssSelector("td.text-left")).getText();
  	        // Si la dirección coincide, realiza la acción (clic en el botón)
@@ -780,5 +782,44 @@ public class Steps_Feature {
         
         clickButton(By.xpath("//input[@value='Continue']"));
     }
-
+    
+    //Feature17
+    
+    @Given("El usuario está en la página de contacto")
+    public void elUsuarioEstaEnLaPaginaDeContacto() {
+        driver.navigate().to("https://opencart.abstracta.us/index.php?route=information/contact");
+    }
+    
+    @When("El usuario ingresa su nombre, correo electrónico, mensaje y enviarlo")
+    public void elUsuarioIngresaDatosDeContacto(Map<String, String> dataTable) {
+        fillForm(dataTable);
+        clickButton(By.cssSelector("input.btn.btn-primary[type='submit']"));
+    }
+    
+    @When("El usuario vacia todos los campos obligatorios y enviarlo")
+    public void elUsuarioIngresaDatosDeContacto() {
+        driver.findElement(By.id("input-name")).clear();
+        driver.findElement(By.id("input-email")).clear();
+        driver.findElement(By.id("input-enquiry")).clear();
+        clickButton(By.cssSelector("input.btn.btn-primary[type='submit']"));
+    }
+    
+    @Then("El sistema debería redirigir a la página de éxito")
+    public void elSistemaDeberiaRedirigirALaPaginaDeExito() {
+        // Esperar que la URL cambie a la página de éxito
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        boolean isRedirected = wait.until(ExpectedConditions.urlToBe("https://opencart.abstracta.us/index.php?route=information/contact/success"));
+        
+        // Validar que la URL actual es la de éxito
+        Assert.assertTrue(isRedirected, "El sistema no redirigió a la página de éxito.");
+    }
+    
+    @Then("El sistema debería mostrar mensajes de error en los campos obligatorios")
+    public void elSistemaDeberiaMostrarMensajesDeErrorIndicandoLosCamposObligatorios() {
+        Map<String, String> errorMessages = new HashMap<>();
+ 	    errorMessages.put("input-name", "Name must be between 3 and 32 characters!");
+ 	    errorMessages.put("input-email", "E-Mail Address does not appear to be valid!");
+ 	    errorMessages.put("input-enquiry", "Enquiry must be between 10 and 3000 characters!");
+	    verifyErrorMessages(errorMessages);
+    }
 }

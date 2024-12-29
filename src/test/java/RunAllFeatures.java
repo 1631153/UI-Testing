@@ -11,7 +11,8 @@ import io.cucumber.testng.CucumberOptions;
 			"src/test/java/features/F13.feature",
 			"src/test/java/features/F14.feature",
 			"src/test/java/features/F15.feature",
-			"src/test/java/features/F16.feature"
+			"src/test/java/features/F16.feature",
+			"src/test/java/features/F17.feature"
 	},  								// Directorio que contiene todas las features
     glue = "steps"                      // Paquete con los step definitions
 )
