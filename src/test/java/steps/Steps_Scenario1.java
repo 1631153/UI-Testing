@@ -56,15 +56,14 @@ public class Steps_Scenario1 {
     	driver.findElement(By.cssSelector("input.btn.btn-primary[value='Continue']")).click();
     }
     
-    @When("the user should see a private policy warning message")
-    public void theUserShouldSeeAPrivatePolicyWarningMessage() throws InterruptedException {
+    @When("the user should see a email warning message")
+    public void theUserShouldSeeAEmailWarningMessage() throws InterruptedException {
     	Thread.sleep(1000);
     	WebElement emailField = driver.findElement(By.id("input-email"));
         String emailType = emailField.getAttribute("type");
-
         Assert.assertEquals(emailType, "email", "El campo no tiene el atributo 'type=email'.");
+        
         driver.findElement(By.cssSelector("input[type='submit']")).click();
-
         String emailValue = emailField.getAttribute("value");
         Assert.assertFalse(emailValue.contains("@"), "El email ingresado no es inválido.");
     }
@@ -76,8 +75,8 @@ public class Steps_Scenario1 {
         Assert.assertEquals(actualMessage, expectedMessage, "The success message is incorrect.");
     }
     
-    @Then("the user should see a email warning message")
-    public void theUserShouldSeeAEmailWarningMessage() throws InterruptedException {
+    @Then("the user should see a used email warning message")
+    public void theUserShouldSeeAUsedEmailWarningMessage() throws InterruptedException {
     	Thread.sleep(1000);
         WebElement warningMessage = driver.findElement(By.cssSelector("div.alert.alert-danger"));
         Assert.assertTrue(warningMessage.isDisplayed(), "El mensaje de advertencia no se mostró.");
@@ -91,6 +90,49 @@ public class Steps_Scenario1 {
     public void TheUserShouldBeInTheSamePage() throws InterruptedException {
     	Thread.sleep(1000);
     	Assert.assertEquals("https://opencart.abstracta.us/index.php?route=account/register", driver.getCurrentUrl(), "La pagina actual no es la correcta.");
+    }
+    
+    @Then("the user should see a bunch of warning messages")
+    public void TheUserShouldSeeABunchOfWarningMessages() throws InterruptedException {
+    	Thread.sleep(1000);
+    	 // Privacy Policy
+        WebElement privacyPolicyWarning = driver.findElement(By.cssSelector(".alert-danger"));
+        Assert.assertEquals(privacyPolicyWarning.getText(), "Warning: You must agree to the Privacy Policy!");
+
+        // First Name
+        WebElement firstNameWarning = driver.findElement(By.cssSelector("#input-firstname + div"));
+        Assert.assertEquals(firstNameWarning.getText(), "First Name must be between 1 and 32 characters!");
+
+        // Last Name
+        WebElement lastNameWarning = driver.findElement(By.cssSelector("#input-lastname + div"));
+        Assert.assertEquals(lastNameWarning.getText(), "Last Name must be between 1 and 32 characters!");
+
+        // E-Mail
+        WebElement emailWarning = driver.findElement(By.cssSelector("#input-email + div"));
+        Assert.assertEquals(emailWarning.getText(), "E-Mail Address does not appear to be valid!");
+
+        // Telephone
+        WebElement telephoneWarning = driver.findElement(By.cssSelector("#input-telephone + div"));
+        Assert.assertEquals(telephoneWarning.getText(), "Telephone must be between 3 and 32 characters!");
+
+        // Password
+        WebElement passwordWarning = driver.findElement(By.cssSelector("#input-password + div"));
+        Assert.assertEquals(passwordWarning.getText(), "Password must be between 4 and 20 characters!");
+    }
+    
+    @Then("the page should indicate that the provided parameters are invalid")
+    public void ThePageShouldIndicateThatTheProvidedParametersAreInvalid() throws InterruptedException {
+        WebElement firstName = driver.findElement(By.id("input-firstname"));
+        WebElement telephone = driver.findElement(By.id("input-telephone"));
+        
+        String firstNameValue = firstName.getAttribute("value");
+        String telephoneValue = telephone.getAttribute("value");
+        
+        boolean isValidFN = firstNameValue.matches("[a-zA-Z]+");
+        boolean isValidT = telephoneValue.matches("\\d+");
+
+        Assert.assertFalse(isValidFN, "El sistema no validó correctamente First Name");
+        Assert.assertFalse(isValidT, "El sistema no validó correctamente Telephone");
     }
     
     //Scenario 2

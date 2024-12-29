@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>4/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sat Dec 28 12:40:18 CET 2024</td>
+<td>Started on:</td><td>Sun Dec 29 18:56:16 CET 2024</td>
 </tr>
-<tr><td>Total time:</td><td>15 seconds (15564 ms)</td>
+<tr><td>Total time:</td><td>49 seconds (49891 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,37 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Registro exitoso de un nuevo usuario", "Registro de usuario"</td>
+<td><div><pre>java.lang.AssertionError: The success message is incorrect. expected [Congratulations! Your new account has been successfully created!] but found [If you already have an account with us, please login at the login page.]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:656)
+	at steps.Steps_Scenario1.theUserShouldSeeAConfirmationMessage(Steps_Scenario1.java:75)
+	at ✽.the user should see a confirmation message(file:///C:/Users/jacot/Documents/GitHub/PerformingTest/src/test/java/features/F1.feature:15)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1226298219", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1226298219'><pre>java.lang.AssertionError: The success message is incorrect. expected [Congratulations! Your new account has been successfully created!] but found [If you already have an account with us, please login at the login page.]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:656)
+	at steps.Steps_Scenario1.theUserShouldSeeAConfirmationMessage(Steps_Scenario1.java:75)
+	at ✽.the user should see a confirmation message(file:///C:/Users/jacot/Documents/GitHub/PerformingTest/src/test/java/features/F1.feature:15)
+</pre></div></td>
+<td>10</td>
+<td>Run_Scenario1@6aaceffd</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -76,14 +107,24 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Contraseña olvidada en correo valido", "Contraseña olvidada"</td>
+<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Registro fallido de un nuevo usuario (formulario vacio)", "Registro de usuario"</td>
 <td></td>
-<td>8</td>
+<td>9</td>
 <td>Run_Scenario1@6aaceffd</td></tr>
 <tr>
-<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Contraseña olvidada en correo invalido", "Contraseña olvidada"</td>
+<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Registro fallido de un nuevo usuario (email)", "Registro de usuario"</td>
 <td></td>
-<td>7</td>
+<td>9</td>
+<td>Run_Scenario1@6aaceffd</td></tr>
+<tr>
+<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Registro fallido de un nuevo usuario (nombre y telefono)", "Registro de usuario"</td>
+<td></td>
+<td>9</td>
+<td>Run_Scenario1@6aaceffd</td></tr>
+<tr>
+<td title='Run_Scenario1.runScenario()'><b>runScenario</b><br>Test class: Run_Scenario1<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Registro fallido de un nuevo usuario (email repetido)", "Registro de usuario"</td>
+<td></td>
+<td>10</td>
 <td>Run_Scenario1@6aaceffd</td></tr>
 </table><p>
 </body>

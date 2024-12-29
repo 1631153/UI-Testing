@@ -14,19 +14,11 @@ And the user agrees to the privacy policy
 And the user clicks on the continue button
 Then the user should see a confirmation message
 
-Scenario: Registro fallido de un nuevo usuario (nombre y telefono)
+Scenario: Registro fallido de un nuevo usuario (formulario vacio)
 Given the user is in the homepage
 When the user clicks to go to the registration page
-And the user fills in the registration form with the following details:
-    | First Name   | 1631153          |
-    | Last Name    | David           |
-    | Email        | f@f.com |
-    | Telephone    | 12345d6789     |
-    | Password     | Password123   |
-    | Confirm      | Password123   |
-And the user agrees to the privacy policy
 And the user clicks on the continue button
-Then the user should see a email warning message
+Then the user should see a bunch of warning messages
 
 Scenario: Registro fallido de un nuevo usuario (email)
 Given the user is in the homepage
@@ -39,5 +31,33 @@ And the user fills in the registration form with the following details:
     | Password     | Password123   |
     | Confirm      | Password123   |
 And the user clicks on the continue button
-And the user should see a private policy warning message
-Then the user should be in the same page
+Then the user should see a email warning message
+
+Scenario: Registro fallido de un nuevo usuario (email repetido)
+Given the user is in the homepage
+When the user clicks to go to the registration page
+And the user fills in the registration form with the following details:
+    | First Name   | 1631153          |
+    | Last Name    | David           |
+    | Email        | f@f.com |
+    | Telephone    | 12345d6789     |
+    | Password     | Password123   |
+    | Confirm      | Password123   |
+And the user agrees to the privacy policy
+And the user clicks on the continue button
+Then the user should see a used email warning message
+
+Scenario: Registro fallido de un nuevo usuario (nombre y telefono)
+Given the user is in the homepage
+When the user clicks to go to the registration page
+And the user fills in the registration form with the following details:
+    | First Name   | 1631153          |
+    | Last Name    | David           |
+    | Email        | f@f.com |
+    | Telephone    | 12345d6789     |
+    | Password     | Password123   |
+    | Confirm      | Password123   |
+And the user agrees to the privacy policy
+And the user clicks on the continue button
+Then the page should indicate that the provided parameters are invalid
+
