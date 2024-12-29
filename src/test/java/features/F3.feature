@@ -27,3 +27,15 @@ Scenario: Confirmar compra
 Given the user is on My Account page
 When the user clicks on Order History
 Then the user should see the date of the last product to confirm
+
+Scenario: Eliminar productos del carrito (uno solo)
+Given the user is in the homepage
+When the user have a product in the Shopping Cart
+And the user removes one product
+Then the product should disappear from the cart
+
+Scenario: Eliminar productos del carrito (todos)
+Given the user is in the homepage
+When the user have multiple products in the Shopping Cart
+And the user removes one by one
+Then the product should disappear from the cart

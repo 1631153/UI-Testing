@@ -222,6 +222,50 @@ public class Steps_Scenario1 {
     	driver.findElement(By.linkText("Order History")).click();
     }
     
+    @When("the user have a product in the Shopping Cart")
+    public void TheUserHaveAProductInTheShoppingCart() {
+    	driver.findElement(By.linkText("MacBook")).click();
+    	driver.findElement(By.id("button-cart")).click();
+    }
+    
+    @When("the user removes one product")
+    public void TheUserRemovesOneProduct() throws InterruptedException {
+    	driver.findElement(By.id("cart-total")).click();
+    	Thread.sleep(1000);
+    	driver.findElement(By.cssSelector("button[title='Remove']")).click();
+    }
+    
+    @When("the user have multiple products in the Shopping Cart")
+    public void TheUserHaveMultipleProductsInTheShoppingCart() {
+    	driver.findElement(By.linkText("MacBook")).click();
+    	driver.findElement(By.id("button-cart")).click();
+    	driver.findElement(By.linkText("Your Store")).click();
+    	driver.findElement(By.linkText("iPhone")).click();
+    	driver.findElement(By.id("button-cart")).click();
+    }
+    
+    @When("the user removes one by one")
+    public void TheUserRemovesOneByOne() throws InterruptedException {
+    	while (true) {
+    		driver.findElement(By.id("cart-total")).click();
+        	Thread.sleep(1000);
+    		List<WebElement> removeButtons = driver.findElements(By.cssSelector("button[title='Remove']"));
+    		if (removeButtons.isEmpty()) {
+                break;
+            }
+    		removeButtons.get(0).click();
+    		Thread.sleep(1000);
+    	}
+    }
+    
+    @Then("the product should disappear from the cart")
+    public void TheProductShouldDisappearFromTheCart() throws InterruptedException {
+    	Thread.sleep(1000);
+    	String cartText = driver.findElement(By.id("cart-total")).getText();
+        Assert.assertTrue(cartText.contains("0 item(s)"), "El carrito sigue teniendo el producto.");
+    }
+    
+    
     @Then("the user should see the cart summary")
     public void theUserShouldSeeTheCartSummary() throws InterruptedException {
     	Thread.sleep(1000);
