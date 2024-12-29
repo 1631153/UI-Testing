@@ -650,8 +650,7 @@ public class Steps_Feature {
 	
 	@When("El usuario accede a la sección de valoraciones")
 	public void el_usuario_accede_a_la_seccion_de_valoraciones() {
-	    WebElement reviewsTab = driver.findElement(By.cssSelector("a[href='#tab-review']"));
-	    reviewsTab.click();
+		clickButton(By.cssSelector("a[href='#tab-review']"));
 	}
 
 	@When("El usuario escribe su nombre como {string}")
@@ -670,21 +669,18 @@ public class Steps_Feature {
 
 	@When("El usuario selecciona una calificación de {int} estrellas")
 	public void el_usuario_selecciona_una_calificacion_de_estrellas(int estrellas) {
-	    WebElement estrellaOption = driver.findElement(By.cssSelector("input[name='rating'][value='" + estrellas + "']"));
-	    estrellaOption.click();
+		clickButton(By.cssSelector("input[name='rating'][value='" + estrellas + "']"));
 	}
 	
 	@When("El usuario hace clic en el botón {string}")
 	public void el_usuario_hace_clic_en_el_boton(String boton) {
-	    WebElement continueButton = driver.findElement(By.id("button-review"));
-	    continueButton.click();
+		clickButton(By.id("button-review"));
 	}
 	
 	@Then("Debería aparecer un mensaje de éxito que dice {string}")
 	public void deberia_aparecer_un_mensaje_de_exito_que_dice(String mensajeExito) {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-	    WebElement mensaje = driver.findElement(By.cssSelector(".alert-success"));
-	    Assert.assertTrue(mensaje.getText().contains(mensajeExito), "El mensaje de éxito no se mostró.");
+		verifySuccessMessage(mensajeExito);
 	}
 	
 	@Then("Debería aparecer un mensaje de error {string}")
@@ -769,4 +765,20 @@ public class Steps_Feature {
         WebElement emptyMessage = driver.findElement(By.cssSelector("div#content p"));
         Assert.assertTrue(emptyMessage.getText().contains(mensaje), "El mensaje de lista vacía no es correcto.");
     }
+    
+    //Feature16
+    
+    // Cuando el usuario hace clic en "Yes" o "No" para suscribirse o desuscribirse
+    @When("El usuario hace clic en {string}")
+    public void elUsuarioHaceClicEn(String opcion) {
+        // Selecciona la opción correspondiente (Yes o No)
+        if (opcion.equals("Yes")) {
+        	clickButton(By.xpath("//input[@name='newsletter'][@value='1']"));
+        } else if (opcion.equals("No")) {
+        	clickButton(By.xpath("//input[@name='newsletter'][@value='0']"));
+        }
+        
+        clickButton(By.xpath("//input[@value='Continue']"));
+    }
+
 }

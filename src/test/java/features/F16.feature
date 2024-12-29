@@ -1,19 +1,20 @@
-Feature: Verificar disponibilidad de productos
-  Para asegurarme de que puedo comprar el producto
+Feature: Suscripción a boletín de noticias
+  Para recibir las últimas ofertas y novedades
   Como usuario
-  Quiero poder ver si un producto está disponible para comprar
+  Quiero poder suscribirme y desuscribirme al boletín de noticias
 
-  Scenario: Producto disponible en stock
-    Given El usuario está en la página de un producto
-    When El producto está en stock
-    Then El sistema debería mostrar "Disponible" junto al producto
+  Scenario: Suscribirse al boletín de noticias
+    Given El usuario está logeado en su cuenta
+      | input-email    | javi.david@test.com |
+      | input-password | Password123         |
+    When El usuario hace clic en el enlace "Newsletter"
+    And El usuario hace clic en "Yes"
+    Then Debería aparecer un mensaje de éxito que dice "Success: Your newsletter subscription has been successfully updated!"
 
-  Scenario: Producto agotado
-    Given El usuario está en la página de un producto
-    When El producto está agotado
-    Then El sistema debería mostrar "Producto agotado" junto al producto
-
-  Scenario: Agregar un producto agotado al carrito
-    Given El usuario está en la página de un producto agotado
-    When El usuario intenta agregar el producto al carrito
-    Then El sistema debería mostrar un mensaje indicando que el producto no está disponible
+  Scenario: Desuscribirse al boletín de noticias
+    Given El usuario está logeado en su cuenta
+      | input-email    | javi.david@test.com |
+      | input-password | Password123         |
+    When El usuario hace clic en el enlace "Newsletter"
+    And El usuario hace clic en "No"
+    Then Debería aparecer un mensaje de éxito que dice "Success: Your newsletter subscription has been successfully updated!"

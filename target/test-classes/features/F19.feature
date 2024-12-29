@@ -1,15 +1,19 @@
-Feature: Contactar con soporte al cliente
-  Para resolver problemas con mi pedido o cuenta
+Feature: Verificar disponibilidad de productos
+  Para asegurarme de que puedo comprar el producto
   Como usuario
-  Quiero poder contactar con el soporte al cliente
+  Quiero poder ver si un producto está disponible para comprar
 
-  Scenario: Enviar un mensaje al soporte
-    Given El usuario está en la página de contacto
-    When El usuario ingresa su nombre, correo electrónico y mensaje
-    And El usuario hace clic en "Enviar"
-    Then El sistema debería enviar el mensaje y mostrar un mensaje de confirmación
+  Scenario: Producto disponible en stock
+    Given El usuario está en la página de un producto
+    When El producto está en stock
+    Then El sistema debería mostrar "Disponible" junto al producto
 
-  Scenario: Intentar enviar un mensaje sin completar el formulario
-    Given El usuario está en la página de contacto
-    When El usuario intenta enviar el formulario sin completar los campos obligatorios
-    Then El sistema debería mostrar un mensaje de error indicando los campos faltantes
+  Scenario: Producto agotado
+    Given El usuario está en la página de un producto
+    When El producto está agotado
+    Then El sistema debería mostrar "Producto agotado" junto al producto
+
+  Scenario: Agregar un producto agotado al carrito
+    Given El usuario está en la página de un producto agotado
+    When El usuario intenta agregar el producto al carrito
+    Then El sistema debería mostrar un mensaje indicando que el producto no está disponible
