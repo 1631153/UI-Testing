@@ -1,4 +1,4 @@
-package steps;
+package steps.Feature14;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -31,7 +31,7 @@ public class Steps_Feature14 {
 	    // Maximiza la ventana del navegador para asegurarse de que los elementos sean visibles
 	    driver.manage().window().maximize();
 	}
-/*
+
 	// Limpieza después de la prueba para cerrar el navegador
 	@After
 	public void tearDown() {
@@ -40,7 +40,7 @@ public class Steps_Feature14 {
 	        driver.quit();
 	    }
 	}
-*/
+
 	@Given("El usuario está en la página del producto que desea valorar")
 	public void el_usuario_esta_en_la_pagina_del_producto_que_desea_valorar() {
 	    driver.navigate().to("https://opencart.abstracta.us/index.php?route=product/product&product_id=40");

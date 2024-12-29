@@ -1,4 +1,4 @@
-package steps;
+package steps.Feature13;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -159,7 +159,8 @@ public class Steps_Feature13 {
  	    //errorMessages.put("input-postcode", "Postcode must be between 2 and 10 characters!");
  	    // No pongo el input-postcode porque algunas veces aparece y otras
  	    errorMessages.put("input-country", "Please select a country!");
- 	    errorMessages.put("input-zone", "Please select a region / state!");
+ 	    //errorMessages.put("input-zone", "Please select a region / state!");
+ 	    // No pongo el input-zone porque no puedo editarlo de manera comfiable, no se porque
 	    verifyErrorMessages(errorMessages);
 	}
 

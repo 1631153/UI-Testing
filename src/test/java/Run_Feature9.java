@@ -3,7 +3,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
     features = "src/test/java/features/F9.feature",  // Ruta al archivo de características (features)
-    glue = "steps"  // Paquete donde se encuentran los pasos definidos (steps)
+    glue = "steps.Feature9"  // Paquete donde se encuentran los pasos definidos (steps)
 )
 public class Run_Feature9 extends AbstractTestNGCucumberTests {
 
