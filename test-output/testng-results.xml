@@ -1,127 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-27T16:21:43 CET" name="Default suite" finished-at="2024-12-27T16:22:30 CET" duration-ms="46970">
+  <suite started-at="2024-12-29T14:09:38 CET" name="Default suite" finished-at="2024-12-29T14:11:35 CET" duration-ms="117524">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2024-12-27T16:21:43 CET" name="Default test" finished-at="2024-12-27T16:22:30 CET" duration-ms="46970">
-      <class name="Run_Feature14">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:21:43 CET" name="setUpClass" finished-at="2024-12-27T16:21:43 CET" duration-ms="182" status="PASS">
+    <test started-at="2024-12-29T14:09:38 CET" name="Default test" finished-at="2024-12-29T14:11:35 CET" duration-ms="117524">
+      <class name="Run_Feature15">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:09:38 CET" name="setUpClass" finished-at="2024-12-29T14:09:38 CET" duration-ms="416" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@5fd43e58]]>
+                <![CDATA[org.testng.TestRunner@a7bbdbc]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:21:43 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T16:21:51 CET" duration-ms="7718" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:09:38 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:09:53 CET" duration-ms="14871" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Valorar un producto con estrellas"]]>
+                <![CDATA["Agregar un producto a la lista de deseos"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Valoración de productos"]]>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:21:51 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T16:21:59 CET" duration-ms="7630" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:09:53 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:10:07 CET" duration-ms="13738" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Intentar enviar una valoración sin escribir un comentario"]]>
+                <![CDATA["Verificar el producto en la lista de deseos"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Valoración de productos"]]>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:21:59 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T16:22:07 CET" duration-ms="8400" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:10:07 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:10:21 CET" duration-ms="14361" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Intentar enviar una valoración exediendo el limite de caracteres de un comentario"]]>
+                <![CDATA["Agregar nuevamente un producto ya en la lista de deseos"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Valoración de productos"]]>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:22:07 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T16:22:15 CET" duration-ms="7556" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:10:21 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:10:36 CET" duration-ms="14316" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Intentar enviar una valoración sin seleccionar una calificación"]]>
+                <![CDATA["Verificar que el producto no se duplica"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Valoración de productos"]]>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:22:15 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T16:22:22 CET" duration-ms="7464" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:10:36 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:10:50 CET" duration-ms="14283" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Intentar enviar una valoración sin escribir un nombre"]]>
+                <![CDATA["Agregar un producto diferente a la lista de deseos"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Valoración de productos"]]>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:22:22 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-27T16:22:30 CET" duration-ms="7972" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:10:50 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:11:03 CET" duration-ms="12976" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Intentar enviar una valoración exediendo el limite de caracteres de un nombre"]]>
+                <![CDATA["Verificar que ambos productos están en la lista de deseos"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Valoración de productos"]]>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:Run_Feature14@10d68fcd]" started-at="2024-12-27T16:22:30 CET" name="tearDownClass" finished-at="2024-12-27T16:22:30 CET" duration-ms="2" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:11:03 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:11:18 CET" duration-ms="15081" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Eliminar un producto de la lista de deseos"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:11:18 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-29T14:11:35 CET" duration-ms="17386" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Eliminar todos los productos de la lista de deseos y verificar la lista vacía"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Guardar productos en la lista de deseos"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:Run_Feature15@10d68fcd]" started-at="2024-12-29T14:11:35 CET" name="tearDownClass" finished-at="2024-12-29T14:11:35 CET" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
-      </class> <!-- Run_Feature14 -->
+      </class> <!-- Run_Feature15 -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
