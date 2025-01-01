@@ -351,7 +351,122 @@ public class Steps_Scenario1 {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals(currentUrl, "https://opencart.abstracta.us/index.php?route=account/forgotten", "La pagina actual no es la correcta.");
     }
+    
+   //Scenario 6
+    @When("the user searches for Laptop & Notebooks")
+    public void TheUserSearchesForLaptopNotebooks() {
+    	driver.findElement(By.linkText("Laptops & Notebooks")).click();
+    	driver.findElement(By.linkText("Show All Laptops & Notebooks")).click();
+    }
+    
+    @When("the user clicks compare for HP")
+    public void TheUserClicksCompareForHP() {
+    	driver.findElement(By.cssSelector("button[onclick=\"compare.add('47');\"]")).click();
+    }
+    
+    @When("the user clicks compare for MacBook")
+    public void TheUserClicksCompareForMacBook() {
+    	driver.findElement(By.cssSelector("button[onclick=\"compare.add('43');\"]")).click();
+    }
+    
+    @When("the user navigates to the product comparison page")
+    public void TheUserNavigatesToTheProductComparisonPage() {
+    	driver.findElement(By.id("compare-total")).click();
+    }
+   
+    @When("Add To Cart the better one")
+    public void AddToCartthebetterone() throws InterruptedException {
+    	Thread.sleep(1000); 
+    	List<WebElement> rows = driver.findElements(By.cssSelector("table.table.table-bordered tr"));
+        
+        double product1Price = Double.MAX_VALUE;
+        double product2Price = Double.MAX_VALUE;
+        String product1Memory = "0GB";
+        String product2Memory = "0GB";
+        int product1Processor = 0;
+        int product2Processor = 0;
 
+        for (WebElement row : rows) {
+            List<WebElement> block = row.findElements(By.tagName("td"));
+            if (block.size() == 3) {
+                String rowHeader = row.findElement(By.tagName("td")).getText();
+                System.out.println(rowHeader);
+                switch (rowHeader) {
+                    case "Price":
+                        product1Price = Double.parseDouble(block.get(1).getText().replace("$", ""));
+                        product2Price = Double.parseDouble(block.get(2).getText().replace("$", ""));
+                        break;
+                    case "test 1":
+                        product1Memory = block.get(1).getText();
+                        product2Memory = block.get(2).getText();
+                        break;
+                    case "No. of Cores":
+                        product1Processor = Integer.parseInt(block.get(1).getText());
+                        product2Processor = Integer.parseInt(block.get(2).getText());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        
+        System.out.println("Product 1 Price: " + product1Price);
+        System.out.println("Product 2 Price: " + product2Price);
+        System.out.println("Product 1 Memory: " + product1Memory);
+        System.out.println("Product 2 Memory: " + product2Memory);
+        System.out.println("Product 1 Processor: " + product1Processor);
+        System.out.println("Product 2 Processor: " + product2Processor);
+
+
+        // Ponderació
+        double weightProcessor = 0.5;
+        double weightMemory = 0.3;
+        double weightPrice = 0.2;
+        double product1Score = 0;
+        double product2Score = 0;
+        // Criteri 1
+        if (product1Processor > product2Processor) {
+            product1Score += weightProcessor;
+        } else if (product2Processor > product1Processor) {
+            product2Score += weightProcessor;
+        }
+
+        // Criteri 2
+        int memory1 = Integer.parseInt(product1Memory.replaceAll("[^0-9]", ""));
+        int memory2 = Integer.parseInt(product2Memory.replaceAll("[^0-9]", ""));
+        if (memory1 > memory2) {
+            product1Score += weightMemory;
+        } else if (memory2 > memory1) {
+        	System.out.println("Incorrecto");
+            product2Score += weightMemory;
+        }
+
+        // Criteri 3
+        if (product1Price < product2Price) {
+        	System.out.println("Correcto");
+            product1Score += weightPrice;
+        } else if (product2Price < product1Price) {
+        	System.out.println("Incorrecto");
+            product2Score += weightPrice;
+        }
+        
+        if (product1Score > product2Score) {
+            driver.findElement(By.cssSelector("input[onclick*=\"cart.add('47'\"]")).click();
+            Thread.sleep(1000);
+            driver.findElement(By.id("button-cart")).click();
+        } else {
+            driver.findElement(By.cssSelector("input[onclick*=\"cart.add('43'\"]")).click();
+        }
+    }
+    
+    @Then("the best laptop is in the shopping cart")
+    public void TheBestLaptopIsInTheShoppingCart() throws InterruptedException {
+    	driver.findElement(By.id("cart")).click();
+    	Thread.sleep(1000);
+    	String successMessage = driver.findElement(By.cssSelector("td.text-left a")).getText();
+        Assert.assertEquals(successMessage.trim(), "HP LP3065");
+    }
 
     
     
