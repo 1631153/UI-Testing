@@ -410,21 +410,13 @@ public class Steps_Scenario1 {
             }
         }
 
-        
-        System.out.println("Product 1 Price: " + product1Price);
-        System.out.println("Product 2 Price: " + product2Price);
-        System.out.println("Product 1 Memory: " + product1Memory);
-        System.out.println("Product 2 Memory: " + product2Memory);
-        System.out.println("Product 1 Processor: " + product1Processor);
-        System.out.println("Product 2 Processor: " + product2Processor);
-
-
         // Ponderació
         double weightProcessor = 0.5;
         double weightMemory = 0.3;
         double weightPrice = 0.2;
         double product1Score = 0;
         double product2Score = 0;
+        
         // Criteri 1
         if (product1Processor > product2Processor) {
             product1Score += weightProcessor;
@@ -467,8 +459,88 @@ public class Steps_Scenario1 {
     	String successMessage = driver.findElement(By.cssSelector("td.text-left a")).getText();
         Assert.assertEquals(successMessage.trim(), "HP LP3065");
     }
+    
+    //Scenario 7
+    @When("the user buys a product")
+    public void TheUserBuysAProduct() throws InterruptedException {
+	    theUserClicksOnMacBookFromFeatured();
+		theUserClicksAddToCartButton();
+		TheUserIsOnTheLoginPage();
+		driver.findElement(By.id("input-email")).sendKeys("javi.david@test.com");
+	    driver.findElement(By.id("input-password")).sendKeys("Password123");
+		TheUserClicksOnTheLoginButton();
+		TheUserIsInTheShoppingCartPage();
+		TheUserClicksOnCheckoutButton();
+		TheUserClicksOnTheContinueButton();
+		TheUserAgreesToThePrivacyPolicy();
+		TheUserClicksOnAnotherContinueButton();
+		TheUserClicksOnTheConfirmOrderButton();
+    }
+    
+    @When("the user goes to Order History in My Account")
+    public void TheUserGoesToOrderHistoryInMyAccount() throws InterruptedException {
+    	Thread.sleep(1000);
+    	driver.findElement(By.cssSelector("a[title='My Account']")).click();
+        driver.findElement(By.linkText("Order History")).click();
+    }
+    
+    @When("the user opens the details of the last order")
+    public void TheUserOpensTheDetailsOfTheLastOrder() {
+    	driver.findElement(By.cssSelector("a[href*='order_id=23477']")).click();
+    }
+    
+    @When("the user clicks on the return button")
+    public void TheUsertClicksOnTheReturnButton() {
+    	driver.findElement(By.cssSelector(".btn.btn-danger")).click();
+    }
+    
+    @When("the user fill the obligatory options to return the product")
+    public void TheUsertFillTheObligatoryOptionsToReturnTheProduct() {
+    	driver.findElement(By.cssSelector("input[type='radio'][value='3']")).click();
+    	driver.findElement(By.cssSelector("input[type='submit']")).click();
+    }
+    
+    @Then("the user should see in the Return page the product")
+    public void TheUserShouldSeeInTheReturnPageTheProduct() throws InterruptedException {
+    	Thread.sleep(1000);
+    	TheUserIsOnMyAccountPage();
+    	driver.findElement(By.linkText("Returns")).click();
+    	
+    	Thread.sleep(1000);
+        WebElement lastReturnDate = driver.findElement(By.cssSelector("table tbody tr:first-child td:nth-child(3)"));
+        String dateText = lastReturnDate.getText();
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Assert.assertEquals(dateText, today.format(formatter), "La fecha del último pedido devuelto no es la de hoy.");
+  
+        driver.findElement(By.cssSelector("a[href*='return_id=144423']")).click();
+        
+        List<WebElement> cells = driver.findElements(By.cssSelector("td"));
+
+	    boolean productFound = false;
+	    boolean reasonFound = false;
+	    for (WebElement block : cells) {
+	        if (block.getText().equals("MacBook")) {
+	            productFound = true;
+	        }
+	        if (block.getText().equals("Order Error")) {
+	            reasonFound = true;
+	        }
+	    }
+	    Assert.assertTrue(productFound, "El nombre del producto no es MacBook.");
+	    Assert.assertTrue(reasonFound, "La razón de la devolución no es Order Error.");
+    }
+    
+    
+    
+    
+    
 
     
+    
+    
+    
+
     
     
     
