@@ -531,18 +531,91 @@ public class Steps_Scenario1 {
 	    Assert.assertTrue(reasonFound, "La razón de la devolución no es Order Error.");
     }
     
+    //Scenario 8
+    @When("the user add products to the Shopping Cart")
+    public void TheUserAddProductsToTheShoppingCart() {
+    	theUserClicksOnMacBookFromFeatured();
+    	theUserClicksAddToCartButton();
+    }
     
+    @When("the user buys the product with the Guess option")
+    public void TheUserBuysTheProductWithTheGuessOption() throws InterruptedException {
+    	TheUserIsInTheShoppingCartPage();
+    	TheUserClicksOnCheckoutButton();
+    	Thread.sleep(1000);
+    	driver.findElement(By.cssSelector("input[type='radio'][value='guest']")).click();
+    	TheUserClicksOnTheContinueButton();
+    }
     
+    @When("the user tries to proceed without a shipping details")
+    public void TheUserTriesToProceedWithoutAShippingDetails() throws InterruptedException {
+    	TheUserIsInTheShoppingCartPage();
+    	TheUserClicksOnCheckoutButton();
+    	Thread.sleep(1000);
+    	driver.findElement(By.cssSelector("input[type='radio'][value='guest']")).click();
+    	TheUserClicksOnTheContinueButton();
+    	Thread.sleep(1000);
+    	driver.findElement(By.id("button-guest")).click();
+    }
     
+    @Then("the user should be able to enter the shipping details witout an account")
+    public void TheUserShouldBeAbleToEnterTheShippingDetailsWitoutAnAccount() throws InterruptedException {
+    	Thread.sleep(1000);
+    	driver.findElement(By.id("input-payment-firstname")).sendKeys("Javi");
+	    driver.findElement(By.id("input-payment-lastname")).sendKeys("David");
+	    driver.findElement(By.id("input-payment-email")).sendKeys("javi.david@test.com");
+	    driver.findElement(By.id("input-payment-telephone")).sendKeys("123456789");
+	    driver.findElement(By.id("input-payment-address-1")).sendKeys("Carrer de les Sitges");
+	    driver.findElement(By.id("input-payment-city")).sendKeys("Bellaterra");
+	    driver.findElement(By.id("input-payment-postcode")).sendKeys("12345");
+	    driver.findElement(By.id("input-payment-country")).click();
+	    driver.findElement(By.cssSelector("select#input-payment-country option[value='195']")).click();
+	    Thread.sleep(1000);
+	    driver.findElement(By.id("input-payment-zone")).click();
+	    driver.findElement(By.cssSelector("select#input-payment-zone option[value='2979']")).click();
+	    Thread.sleep(1000);
+    	driver.findElement(By.id("button-guest")).click();
+	    TheUserAgreesToThePrivacyPolicy();
+	    TheUserClicksOnAnotherContinueButton();
+	    TheUserClicksOnTheConfirmOrderButton();
+	    theUserShouldSeeAnOrderConfirmationMessage();
+    }
     
+    @Then("warning messages about the shipping details should appear")
+    public void WarningMessageAboutTheShippingDetailsShouldAppear() throws InterruptedException {
+    	Thread.sleep(1000);
+    	// First Name
+        WebElement firstNameWarning = driver.findElement(By.cssSelector("#input-payment-firstname + div"));
+        Assert.assertEquals(firstNameWarning.getText(), "First Name must be between 1 and 32 characters!");
 
-    
-    
-    
-    
+        // Last Name
+        WebElement lastNameWarning = driver.findElement(By.cssSelector("#input-payment-lastname + div"));
+        Assert.assertEquals(lastNameWarning.getText(), "Last Name must be between 1 and 32 characters!");
 
-    
-    
-    
-    
+        // E-Mail
+        WebElement emailWarning = driver.findElement(By.cssSelector("#input-payment-email + div"));
+        Assert.assertEquals(emailWarning.getText(), "E-Mail address does not appear to be valid!");
+
+        // Telephone
+        WebElement telephoneWarning = driver.findElement(By.cssSelector("#input-payment-telephone + div"));
+        Assert.assertEquals(telephoneWarning.getText(), "Telephone must be between 3 and 32 characters!");
+
+        // Address 1
+        WebElement AddressWarning = driver.findElement(By.cssSelector("#input-payment-address-1 + div"));
+        Assert.assertEquals(AddressWarning.getText(), "Address 1 must be between 3 and 128 characters!");
+        
+        // City
+        WebElement CityWarning = driver.findElement(By.cssSelector("#input-payment-city + div"));
+        Assert.assertEquals(CityWarning.getText(), "City must be between 2 and 128 characters!");
+        
+        // Postcode
+        WebElement PostcodeWarning = driver.findElement(By.cssSelector("#input-payment-postcode + div"));
+        Assert.assertEquals(PostcodeWarning.getText(), "Postcode must be between 2 and 10 characters!");
+        
+        // Region/State
+        WebElement RegionWarning = driver.findElement(By.cssSelector("#input-payment-zone + div"));
+        Assert.assertEquals(RegionWarning.getText(), "Please select a region / state!");
+    }
+
+     
 }
