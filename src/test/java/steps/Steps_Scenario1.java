@@ -297,27 +297,28 @@ public class Steps_Scenario1 {
     }
 
     //Scenario 4
-    @When("the user clicks on the currency dropdown to select Euro")
-    public void TheUserClicksOnTheCurrencyDropdownToSelectEuro() {
-    	driver.findElement(By.className("dropdown-toggle")).click();
-    	driver.findElement(By.name("EUR")).click();
+    @When("the user clicks on the currency dropdown to select {string}")
+    public void theUserClicksOnTheCurrencyDropdownToSelectCurrency(String currency) {
+        driver.findElement(By.className("dropdown-toggle")).click();
+        driver.findElement(By.name(currency)).click();
     }
-    
-    @Then("the prices on the homepage should be displayed all in euros")
-    public void ThePricesOnTheHomepageShouldBeDisplayedAllInEuros() throws InterruptedException {
-    	Thread.sleep(1000);
-    	List<WebElement> priceElements = driver.findElements(By.cssSelector(".price"));
-        boolean allPricesInEuros = true;
+
+    @Then("the prices on the homepage should be displayed all in {string}")
+    public void thePricesOnTheHomepageShouldBeDisplayedAllInCurrency(String currencySymbol) throws InterruptedException {
+        Thread.sleep(1000);
+        List<WebElement> priceElements = driver.findElements(By.cssSelector(".price"));
+        boolean allPricesInSelectedCurrency = true;
 
         for (WebElement priceElement : priceElements) {
             String priceText = priceElement.getText();
-            if (!priceText.contains("€")) {
-                allPricesInEuros = false;
+            if (!priceText.contains(currencySymbol)) {
+                allPricesInSelectedCurrency = false;
                 break;
             }
         }
-        Assert.assertTrue(allPricesInEuros, "No todos los precios están en euros.");
+        Assert.assertTrue(allPricesInSelectedCurrency, "No todos los precios están en: " + currencySymbol);
     }
+
 
     //Scenario 5
     @When("the user clicks on forgotten password")
