@@ -1,64 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-18T12:00:20 CET" name="Default suite" finished-at="2024-12-18T12:00:27 CET" duration-ms="7129">
+  <suite started-at="2025-01-07T11:12:11 CET" name="Default suite" finished-at="2025-01-07T11:12:28 CET" duration-ms="16257">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Scenario1@2a8448fa]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Scenario1@6aaceffd]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2024-12-18T12:00:20 CET" name="Default test" finished-at="2024-12-18T12:00:27 CET" duration-ms="7129">
+    <test started-at="2025-01-07T11:12:11 CET" name="Default test" finished-at="2025-01-07T11:12:28 CET" duration-ms="16257">
       <class name="Run_Scenario1">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:Run_Scenario1@2a8448fa]" started-at="2024-12-18T12:00:20 CET" name="setUpClass" finished-at="2024-12-18T12:00:20 CET" duration-ms="321" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:Run_Scenario1@6aaceffd]" started-at="2025-01-07T11:12:11 CET" name="setUpClass" finished-at="2025-01-07T11:12:12 CET" duration-ms="337" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@4e92466a]]>
+                <![CDATA[org.testng.TestRunner@1e9804b9]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Scenario1@2a8448fa]" started-at="2024-12-18T12:00:20 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2024-12-18T12:00:27 CET" duration-ms="6736" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Scenario1@6aaceffd]" started-at="2025-01-07T11:12:12 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-01-07T11:12:18 CET" duration-ms="5913" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Registro exitoso de un nuevo usuario"]]>
+                <![CDATA["Cambiar la moneda a euros"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Registro de usuario"]]>
+                <![CDATA["Cambio de moneda"]]>
               </value>
             </param>
           </params>
-          <exception class="org.openqa.selenium.InvalidSelectorException">
-            <message>
-              <![CDATA[Compound class names not permitted
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
-Build info: version: '4.26.0', revision: '8ccf0219d7'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
-Driver info: driver.version: unknown]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.InvalidSelectorException: Compound class names not permitted
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
-Build info: version: '4.26.0', revision: '8ccf0219d7'
-System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
-Driver info: driver.version: unknown
-at org.openqa.selenium.By$ByClassName.<init>(By.java:309)
-at org.openqa.selenium.By.className(By.java:100)
-at steps.Steps_Scenario1.TheUserClicksOnTheContinueButton(Steps_Scenario1.java:47)
-at ✽.the user clicks on the continue button(file:///C:/Users/Javi/eclipse-workspace/Performance%20Testing/src/test/java/features/F1.feature:14)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.InvalidSelectorException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:Run_Scenario1@2a8448fa]" started-at="2024-12-18T12:00:27 CET" name="tearDownClass" finished-at="2024-12-18T12:00:27 CET" duration-ms="3" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Scenario1@6aaceffd]" started-at="2025-01-07T11:12:18 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-01-07T11:12:23 CET" duration-ms="5028" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Cambiar la moneda a libras"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Cambio de moneda"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:Run_Scenario1@6aaceffd]" started-at="2025-01-07T11:12:23 CET" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-01-07T11:12:28 CET" duration-ms="4902" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Cambiar la moneda a dolares"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Cambio de moneda"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:Run_Scenario1@6aaceffd]" started-at="2025-01-07T11:12:28 CET" name="tearDownClass" finished-at="2025-01-07T11:12:28 CET" duration-ms="4" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-failed">Default suite</span>
+              <span class="suite-name border-passed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Javi\AppData\Local\Temp\testng-eclipse-45266290\testng-customsuite.xml</span>
+                    <span>C:\Users\jacot\AppData\Local\Temp\testng-eclipse--1231906106\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,21 +92,31 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
                     </span>
-                    <div class="method-list-content failed suite-Default_suite">
+                    <div class="method-list-content passed suite-Default_suite">
                       <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="Run_Scenario1" class="method navigator-link" hash-for-method="runScenario(&quot;Registro exitoso de un nuevo usuario&quot;, &quot;Registro de usuario&quot;)">runScenario("Registro exitoso de un nuevo usuario", "Registro de usuario")</a> <!-- method navigator-link -->
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="Run_Scenario1" class="method navigator-link" hash-for-method="runScenario(&quot;Cambiar la moneda a euros&quot;, &quot;Cambio de moneda&quot;)">runScenario("Cambiar la moneda a euros", "Cambio de moneda")</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-Default_suite -->
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="Run_Scenario1" class="method navigator-link" hash-for-method="runScenario(&quot;Cambiar la moneda a libras&quot;, &quot;Cambio de moneda&quot;)">runScenario("Cambiar la moneda a libras", "Cambio de moneda")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="Run_Scenario1" class="method navigator-link" hash-for-method="runScenario(&quot;Cambiar la moneda a dolares&quot;, &quot;Cambio de moneda&quot;)">runScenario("Cambiar la moneda a dolares", "Cambio de moneda")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,39 +128,48 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-failed">
+          <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
+              <img src="passed.png"/>
               <span class="class-name">Run_Scenario1</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="runScenario(&quot;Registro exitoso de un nuevo usuario&quot;, &quot;Registro de usuario&quot;)">
-                  </a> <!-- runScenario("Registro exitoso de un nuevo usuario", "Registro de usuario") -->
+                  <a name="runScenario(&quot;Cambiar la moneda a euros&quot;, &quot;Cambio de moneda&quot;)">
+                  </a> <!-- runScenario("Cambiar la moneda a euros", "Cambio de moneda") -->
                   <span class="method-name">runScenario</span>
-                  <span class="parameters">("Registro exitoso de un nuevo usuario","Registro de usuario")</span>
-                  <div class="stack-trace">org.openqa.selenium.InvalidSelectorException: Compound class names not permitted
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
-Build info: version: &apos;4.26.0&apos;, revision: &apos;8ccf0219d7&apos;
-System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;22.0.2&apos;
-Driver info: driver.version: unknown
-	at org.openqa.selenium.By$ByClassName.&lt;init&gt;(By.java:309)
-	at org.openqa.selenium.By.className(By.java:100)
-	at steps.Steps_Scenario1.TheUserClicksOnTheContinueButton(Steps_Scenario1.java:47)
-	at ✽.the user clicks on the continue button(file:///C:/Users/Javi/eclipse-workspace/Performance%20Testing/src/test/java/features/F1.feature:14)
-
-</div> <!-- stack-trace -->
+                  <span class="parameters">("Cambiar la moneda a euros","Cambio de moneda")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;Cambiar la moneda a libras&quot;, &quot;Cambio de moneda&quot;)">
+                  </a> <!-- runScenario("Cambiar la moneda a libras", "Cambio de moneda") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("Cambiar la moneda a libras","Cambio de moneda")</span>
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;Cambiar la moneda a dolares&quot;, &quot;Cambio de moneda&quot;)">
+                  </a> <!-- runScenario("Cambiar la moneda a dolares", "Cambio de moneda") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("Cambiar la moneda a dolares","Cambio de moneda")</span>
                   <em>
 (Runs Cucumber Scenarios)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-failed -->
+          </div> <!-- suite-Default_suite-class-passed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Javi\AppData\Local\Temp\testng-eclipse-45266290\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\jacot\AppData\Local\Temp\testng-eclipse--1231906106\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -207,16 +226,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'Run_Scenario1')
-data.setCell(0, 3, 6736);
+data.setCell(0, 3, 5913);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'runScenario')
+data.setCell(1, 2, 'Run_Scenario1')
+data.setCell(1, 3, 5028);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'runScenario')
+data.setCell(2, 2, 'Run_Scenario1')
+data.setCell(2, 3, 4902);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 6 seconds</span>
+              <span class="suite-total-time">Total running time: 15 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -244,18 +271,24 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">Run_Scenario1</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUpClass(org.testng.TestRunner@4e92466a)</span>
+                <span class="method-name">setUpClass(org.testng.TestRunner@1e9804b9)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">runScenario("Registro exitoso de un nuevo usuario", "Registro de usuario")</span>
-                <span class="method-start">341 ms</span>
+                <span class="method-name">runScenario("Cambiar la moneda a euros", "Cambio de moneda")</span>
+                <span class="method-start">354 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("Cambiar la moneda a libras", "Cambio de moneda")</span>
+                <span class="method-start">6272 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">runScenario("Cambiar la moneda a dolares", "Cambio de moneda")</span>
+                <span class="method-start">11302 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">7086 ms</span>
+                <span class="method-start">16210 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
