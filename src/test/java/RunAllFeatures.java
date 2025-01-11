@@ -4,6 +4,13 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 	features = {
+			"src/test/java/features/F02.feature",
+			"src/test/java/features/F03.feature",
+			"src/test/java/features/F04.feature",
+			"src/test/java/features/F05.feature",
+			"src/test/java/features/F06.feature",
+			"src/test/java/features/F07.feature",
+			"src/test/java/features/F08.feature",
 			"src/test/java/features/F09.feature",
 			"src/test/java/features/F10.feature",
 			"src/test/java/features/F11.feature",
